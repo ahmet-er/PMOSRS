@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PMOSRS.Data.Core.Repository.Interfaces
-{
+{  
     public interface IEFRepository<T> where T : class, new()
     {
         ResultItem<T> Getir(Expression<Func<T, bool>> filtre = null, bool isTracking = true);

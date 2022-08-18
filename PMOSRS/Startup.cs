@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PMOSRS.Data.Core.Business;
 using PMOSRS.Data.Core.Repository;
 
 namespace PMOSRS
@@ -33,6 +34,7 @@ namespace PMOSRS
             services.AddTransient(new FileRepository().GetType());
             services.AddTransient(new AuthorityRoleMapRepository().GetType());
             services.AddTransient(new AuthorityRepository().GetType());
+            
 
         }
 

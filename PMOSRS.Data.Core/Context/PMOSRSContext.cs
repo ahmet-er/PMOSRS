@@ -31,7 +31,7 @@ namespace PMOSRS.Model.Models.Context
         public DbSet<t_Roles> t_Roles { get; set; }
         public DbSet<t_RoleUserMaps> t_RoleUserMaps { get; set; }
         public DbSet<t_Settings> t_Settings { get; set; }
-        public DbSet<t_SRSs> t_SRSses { get; set; }
+        public DbSet<t_SRSs> t_SRSs { get; set; }
         public DbSet<t_SRSStates> t_SRSStates { get; set; }
         public DbSet<t_TIDs> t_TIDs { get; set; }
         public DbSet<t_TIDStates> t_TIDStates { get; set; }
@@ -52,7 +52,6 @@ namespace PMOSRS.Model.Models.Context
                 var result = item.State;
 
 
-
                 switch (result)
                 {
                     case EntityState.Added:
@@ -67,9 +66,6 @@ namespace PMOSRS.Model.Models.Context
                             item.Entity.UpdateDate = DateTime.Now;
                             break;
                         }
-
-
-
                 }
             }
             return base.SaveChangesAsync(cancellationToken);
