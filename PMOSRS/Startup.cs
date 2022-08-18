@@ -22,6 +22,17 @@ namespace PMOSRS
             services.AddControllersWithViews();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddTransient(new ProjectRepository().GetType());
+            services.AddTransient(new UserRepository().GetType());
+            services.AddTransient(new TSRepository().GetType());
+            services.AddTransient(new TIDRepository().GetType());
+            services.AddTransient(new SRSRepository().GetType());
+            services.AddTransient(new SettingRepository().GetType());
+            services.AddTransient(new RoleUserMapRepository().GetType());
+            services.AddTransient(new RoleRepository().GetType());
+            services.AddTransient(new ProjectUserMapRepository().GetType());
+            services.AddTransient(new FileRepository().GetType());
+            services.AddTransient(new AuthorityRoleMapRepository().GetType());
+            services.AddTransient(new AuthorityRepository().GetType());
 
         }
 
