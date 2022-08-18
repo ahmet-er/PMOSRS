@@ -7,11 +7,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PMOSRS.Data.Core\PMOSRS.Data.Core.csproj" />
     <ProjectReference Include="..\PMOSRS.Model\PMOSRS.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\UI\Controllers\" />
+    <Folder Include="Areas\UI\Views\" />
   </ItemGroup>
 
 </Project>
