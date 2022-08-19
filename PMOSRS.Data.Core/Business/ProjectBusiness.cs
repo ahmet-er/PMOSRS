@@ -4,8 +4,6 @@ using PMOSRS.Model.Models.Entities;
 using PMOSRS.Model.Models.Items;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PMOSRS.Data.Core.Business
@@ -48,7 +46,7 @@ namespace PMOSRS.Data.Core.Business
             if (res.Data != null)
             {
                 res.Data = T;
-                return await _projectRepository.AsyncSil(res.Data);
+                return await _projectRepository.AsyncDuzelt(res.Data);
             }
 
             else

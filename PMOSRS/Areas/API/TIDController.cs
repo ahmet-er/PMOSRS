@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PMOSRS.Areas.API.Controllers.Base;
+using PMOSRS.Data.Core.Business;
 using PMOSRS.Data.Core.Repository;
 using PMOSRS.Model.Models.Entities;
 using System;
@@ -11,34 +12,36 @@ namespace PMOSRS.Areas.API
     public class TIDController : BaseController
     {
         private readonly TIDRepository _tIDRepository;
+        private readonly TIDBusiness _tIDBusiness;
 
         public TIDController(TIDRepository tIDRepository)
         {
             _tIDRepository = tIDRepository;
+            _tIDBusiness = new TIDBusiness(_tIDRepository);
         }
 
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] t_TIDs entity)
         {
-            return View();
+            return Json(await _tIDBusiness.Add(entity));
         }
 
         [HttpPost("Update")]
         public async Task<IActionResult> Update([FromBody] t_TIDs entity)
         {
-            return View();
+            return Json(await _tIDBusiness.Update(entity));
         }
 
         [HttpPost("Remove")]
         public async Task<IActionResult> Remove([FromBody] Guid id)
         {
-            return View();
+            return Json(await _tIDBusiness.Delete(id));
         }
 
         [HttpPost("List")]
         public async Task<IActionResult> List()
         {
-            return View();
+            return Json(await _tIDBusiness.Select());
         }
     }
 }
