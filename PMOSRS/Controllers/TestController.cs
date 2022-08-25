@@ -7,22 +7,22 @@ using PMOSRS.Model.Models.Entities;
 using System;
 using System.Threading.Tasks;
 
-namespace PMOSRS.Areas.API
+namespace PMOSRS.Controllers
 {
-
-    [Area("API")]
-    [Route("API/[Controller]")]
-    public class ProjectController : BaseController
+    [ApiController]
+    [EnableCors("myclients")]
+    [RequireHttps]
+    public class TestController : BaseController
     {
         private readonly ProjectRepository _projectRepository;
         private readonly ProjectBusiness _projectBusiness;
 
-        public ProjectController(ProjectRepository projectRepository)
+        public TestController(ProjectRepository projectRepository)
         {
             _projectRepository = projectRepository;
             _projectBusiness = new ProjectBusiness(_projectRepository);
         }
-        
+
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] t_Projects entity)
         {
@@ -41,12 +41,10 @@ namespace PMOSRS.Areas.API
             return Json(await _projectBusiness.Delete(id));
         }
 
-        //[HttpPost("List")]
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            return Json(await _projectBusiness.Select());
+            return View();
         }
-        
     }
 }

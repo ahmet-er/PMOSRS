@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 using PMOSRS.Data.Core.Business;
 using PMOSRS.Data.Core.Repository;
 
@@ -34,9 +36,25 @@ namespace PMOSRS
             services.AddTransient(new FileRepository().GetType());
             services.AddTransient(new AuthorityRoleMapRepository().GetType());
             services.AddTransient(new AuthorityRepository().GetType());
+
+            services.AddCors();
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
+
+            services.AddMvc(x => x.EnableEndpointRouting = false).AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null).AddViewOptions(options => options.HtmlHelperOptions.ClientValidationEnabled = true)
+              .AddNewtonsoftJson(opt => opt.SerializerSettings.ContractResolver = new DefaultContractResolver()).AddRazorRuntimeCompilation();
+
             
 
+
+
+
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -54,20 +72,23 @@ namespace PMOSRS
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
+            
+
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader());//ben ekledim
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseRouting();
+
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "areas", template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
+
+            
+
         }
     }
 }
