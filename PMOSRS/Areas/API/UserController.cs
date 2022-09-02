@@ -3,11 +3,15 @@ using PMOSRS.Areas.API.Controllers.Base;
 using PMOSRS.Data.Core.Business;
 using PMOSRS.Data.Core.Repository;
 using PMOSRS.Model.Models.Entities;
+using PMOSRS.Model.Models.Items;
 using System;
 using System.Threading.Tasks;
 
 namespace PMOSRS.Areas.API
 {
+/// <summary>
+/// Get All User from database
+/// </summary>
     [Area("API")]
     [Route("API/[Controller]")]
     public class UserController : BaseController
@@ -44,5 +48,11 @@ namespace PMOSRS.Areas.API
         {
             return Json(await _userBusiness.Select());
         }
+        [HttpGet("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginItem loginItem)
+        {
+            return Json(await _userBusiness.GetToken(loginItem));
+        }
+
     }
 }

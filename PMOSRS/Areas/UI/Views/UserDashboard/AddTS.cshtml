@@ -1,0 +1,45 @@
+﻿@{
+	ViewData["Title"] = "AddTS";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row justify-content-center mt-5">
+
+	<div class="col-md-8 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h4 class="card-title text-light">Teknik Şartname Ekle</h4>
+				<p class="card-description text-light"> Teknik şartnamenin bağlı olduğu projeyi, teknik şartname adını girip, dosyayı yükleyiniz. </p>
+				<form class="forms-sample text-light">
+					<div class="form-group">
+						<div class="input-group mb-3">
+							<label class="input-group-text bg-primary text-light" for="inputGroupSelect01">Bağlı Proje</label>
+							<select class="form-select" id="inputGroupSelect01">
+								<option selected>Seçin...</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputTSName">Teknik Şartname Adı</label>
+						<input type="text" class="form-control" id="exampleInputTSName" placeholder="Teknik Şartname Adı">
+					</div>
+					<br />
+					<div class="form-group">
+						<label>Teknik Şartname Dosyası</label>
+						<div class="input-group mb-3">
+							<input type="file" class="form-control" id="inputGroupFile02">
+							<label class="input-group-text" for="inputGroupFile02">Upload</label>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary mr-2 mt-3">Kaydet</button>
+					<button class="btn btn-outline-danger mt-3 mx-3">İptal</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+

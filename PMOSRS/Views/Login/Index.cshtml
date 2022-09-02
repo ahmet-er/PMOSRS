@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Login</title>
+	<link src="~/lib/twitter-bootstrap/css/bootstrap.css/" />
+	<script src="~/lib/jquery/jquery361/jquery.js/"></script>
+	<script src="~/lib/twitter-bootstrap/js/bootstrap.js/"></script>
+	<script src="~/lib/popper/umd/popper.js/"></script>
+</head>
+<body class="d-flex flex-column h-100 bg-light">
+
+	<div class="container-scroller mt-auto">
+		<div class="container-fluid page-body-wrapper full-page-wrapper">
+			<div class="content-wrapper d-flex align-items-center auth px-0">
+				<div class="row w-100 mx-0">
+					<div class="col-lg-4 mx-auto">
+						<div class="auth-form-light text-left py-5 px-4 px-sm-5 border border-dark rounded">
+
+							<form class="pt-3">
+								<div class="form-group mt-3 text-center">
+									<img src="~/files/images/PMOSRS-logos_black.png" alt="" height="50em">
+								</div>
+								<div class="form-group mt-5">
+									<input type="email" class="form-control form-control-lg" id="idUserName" placeholder="Email">
+								</div>
+								<div class="form-group mt-3">
+									<input type="password" class="form-control form-control-lg" id="idPassword" placeholder="Şifre">
+								</div>
+								<div class="mt-3">
+									<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#">Giriş Yap</a>
+								</div>
+								<div class="text-center mt-4 font-weight-light">
+									Henüz hesabınız yok mu? <a href="/UI/Register/Index" class="text-primary">Kayıt Ol</a>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- content-wrapper ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+</body>
+</html>
+<script>
+	$(document).ready(function() {
+
+	});
+	function Login() {
+		var dt = { userName: $("#idUserName").val(), password: $("#idPassword").val() }
+		$.ajax({
+
+			url: _url,
+			data: JSON.stringify(dt),
+			type: 'POST',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				if (result != null && result.Nesne != null) {
+					var nesne = result.Nesne;
+
+					console.log(nesne);
+
+					$('#txtLogin').val(JSON.stringify(nesne));
+
+					AccessToken = result.Nesne.AccToken;
+					KulID = result.Nesne.Kullanici.ObjectID;
+
+					$('#firmaAlan').removeClass('collapse');
+					$('#loginAlan').addClass('collapse');
+					//$('#frmLogin').submit();
+				}
+				else {
+					$("#txtUyariHataliGiris").removeClass("collapse");
+				}
+				loadPanel2.hide();
+				console.log(result.ExMesaj);
+			},
+			failure: function(er) {
+				console.log("Dönen Hata");
+				console.log(er);
+			}
+		});
+	}
+</script>

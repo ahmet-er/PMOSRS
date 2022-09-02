@@ -1,0 +1,54 @@
+﻿@{
+	ViewData["Title"] = "ListProject";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row mt-3">
+	<div class="col-3 grid-margin">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h4 class="card-title text-light">Proje Ara</h4>
+
+				<form class="forms-sample text-light">
+					<div class="form-group">
+						<label for="exampleInputProjectName">Proje Adı</label>
+						<input type="text" class="form-control" id="exampleInputProjectName" placeholder="Proje Adı">
+					</div>
+					<button type="submit" class="btn btn-primary mr-2 mt-3">Ara</button>
+					@*<button class="btn btn-outline-danger mt-3 mx-3">Cancel</button>*@
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-9 grid-margin">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h4 class="card-title text-light">Proje Listesi</h4>
+				<div class="table-responsive">
+					<table class="table">
+						<thead class="text-light">
+							<tr>
+								<th> # </th>
+								<th> Proje Adı </th>
+								<th> Proje Açıklama </th>
+								<th> Düzenle </th>
+								<th> Sil </th>
+							</tr>
+						</thead>
+						<tbody class="text-light">
+							<tr>
+								<!-- foreach ile buraya project tablosunu bas -->
+								<td> 1 </td>
+								<td> PMOSRS </td>
+								<td> Uygulama, yazılım süreçlerinin dökümantasyon takibini yapacaktır. </td>
+								<td> <a class="btn btn-outline-warning" href="#" role="button">Düzenle</a> </td>
+								<td> <a class="btn btn-outline-danger" href="#" role="button">Sil</a> </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

@@ -1,0 +1,53 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="container-scroller mt-auto">
+	<div class="container-fluid page-body-wrapper full-page-wrapper">
+		<div class="content-wrapper d-flex align-items-center auth px-0">
+			<div class="row w-100 mx-0">
+				<div class="col-lg-4 mx-auto">
+					<div class="auth-form-light text-left py-5 px-4 px-sm-5 border border-dark rounded">
+						<div class="form-group mt-3 text-center">
+								<img src="~/files/images/PMOSRS-logos_black.png" alt="" height="50em">
+							</div>
+						
+						<h4 class="mt-3">Yeni misin?</h4>
+						<h6 class="font-weight-light">Kaydolmak kolaydır. Sadece birkaç adım alır</h6>
+						<form class="pt-3">
+							<div class="form-group">
+								<input type="text" class="form-control form-control-lg" id="exampleInputFirstName" placeholder="Ad">
+							</div>
+							<div class="form-group mt-3">
+								<input type="text" class="form-control form-control-lg" id="exampleInputLastName" placeholder="Soyad">
+							</div>
+							<div class="form-group mt-3">
+								<input type="email" class="form-control form-control-lg" id="exampleInputEmail" placeholder="Email">
+							</div>
+							<div class="form-group mt-3">
+								<input type="password" class="form-control form-control-lg" id="exampleInputPassword" placeholder="Şifre">
+							</div>
+							<div class="mb-4 mt-3">
+								<div class="form-check">
+									<label class="form-check-label text-muted">
+										<input type="checkbox" class="form-check-input">
+										Tüm Şartlar ve Koşulları kabul ediyorum
+									</label>
+								</div>
+							</div>
+							<div class="mt-3">
+								<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#">KAYIT OL</a>
+							</div>
+							<div class="text-center mt-4 font-weight-light">
+								Zaten hesabınız var mı? <a href="/UI/Login/Index" class="text-primary">Giriş Yap</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- content-wrapper ends -->
+	</div>
+	<!-- page-body-wrapper ends -->
+</div>

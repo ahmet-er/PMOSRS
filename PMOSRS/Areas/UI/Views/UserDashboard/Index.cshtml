@@ -1,0 +1,220 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- dashboard bilgi verme cardları-->
+<div class="row justify-content-center">
+	<div class="col-sm-6 grid-margin">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h5 class="text-light">Proje Sayısı</h5>
+				<div class="row text-light">
+					<div class="col-8 col-sm-12 col-xl-8 my-auto">
+						<div class="d-flex d-sm-block d-md-flex align-items-center">
+							<h2 class="mb-0">99</h2>
+							<p class="text-success ml-2 mb-0 font-weight-medium">+8.3%</p>
+						</div>
+						<h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6>
+					</div>
+					<div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+						<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-laptop text-danger" viewBox="0 0 16 16">
+							<path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5h11zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2h-11zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5z" />
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 grid-margin">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h5 class="text-light">Kullanıcı Sayısı</h5>
+				<div class="row text-light">
+					<div class="col-8 col-sm-12 col-xl-8 my-auto">
+						<div class="d-flex d-sm-block d-md-flex align-items-center">
+							<h2 class="mb-0">1235</h2>
+							<p class="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
+						</div>
+						<h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
+					</div>
+					<div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+						<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-people-fill text-success" viewBox="0 0 16 16">
+							<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+							<path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+							<path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+<!-- dashboard son girilen 5 proje tarzı tablo-->
+<div class="row mt-3">
+	<div class="col-12 grid-margin">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h4 class="card-title text-light">Son 5 Proje</h4>
+				<div class="table-responsive">
+					<table class="table">
+						<thead class="text-light">
+							<tr>
+								<th> # </th>
+								<th> Kişi </th>
+								<th> Proje Adı </th>
+								<th> Teknik Şartnameler </th>
+								<th> Teknik İsterler </th>
+								<th> Yazılım Gereksinimleri </th>
+								<th> Proje Durumu </th>
+							</tr>
+						</thead>
+						<tbody class="text-light">
+							<tr>
+								<td> 1 </td>
+								<td>
+									<span class="pl-2">Ahmet Er</span>
+								</td>
+								<td> PMOSRS </td>
+								<td> pmosrs-ts.pdf </td>
+								<td> pmosrs-tid.pdf </td>
+								<td> pmosrs-srs.pdf </td>
+								<td>
+									<div class="text text-warning">Devam Ediyor</div>
+								</td>
+							</tr>
+							<tr>
+								<td> 2 </td>
+								<td>
+									<span class="pl-2">Orçun Ten</span>
+								</td>
+								<td> Test1 </td>
+								<td> pmosrs-ts.pdf </td>
+								<td> pmosrs-tid.pdf </td>
+								<td> pmosrs-srs.pdf </td>
+								<td>
+									<div class="text text-success">Tamamlandı</div>
+								</td>
+							</tr>
+							<tr>
+								<td> 3 </td>
+								<td>
+									<span class="pl-2">Kişi 3</span>
+								</td>
+								<td> Test 3 </td>
+								<td> pmosrs-ts.pdf </td>
+								<td> pmosrs-tid.pdf </td>
+								<td> pmosrs-srs.pdf </td>
+								<td>
+									<div class="text text-danger">Rejected</div>
+								</td>
+							</tr>
+							<tr>
+								<td> 4 </td>
+								<td>
+									<span class="pl-2">Kişi 4</span>
+								</td>
+								<td> Test 4 </td>
+								<td> pmosrs-ts.pdf </td>
+								<td> pmosrs-tid.pdf </td>
+								<td> pmosrs-srs.pdf </td>
+								<td>
+									<div class="text text-warning">Devam Ediyor</div>
+								</td>
+							</tr>
+							<tr>
+								<td> 5 </td>
+								<td>
+									<span class="pl-2">Kişi 5</span>
+								</td>
+								<td> Test 5 </td>
+								<td> pmosrs-ts.pdf </td>
+								<td> pmosrs-tid.pdf </td>
+								<td> pmosrs-srs.pdf </td>
+								<td>
+									<div class="text text-warning">Devam Ediyor</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- dünya haritası -->
+<div class="row mt-3">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h4 class="card-title text-light">Ülkelere Göre Ziyaretçiler</h4>
+				<div class="row">
+					<div class="col-md-5">
+						<div class="table-responsive">
+							<table class="table text-light">
+								<tbody>
+									<tr>
+										<td>
+											<i class="flag-icon flag-icon-us"></i>
+										</td>
+										<td>Türkiye</td>
+										<td class="text-right"> 1500 </td>
+										<td class="text-right font-weight-medium"> 56.35% </td>
+									</tr>
+									<tr>
+										<td>
+											<i class="flag-icon flag-icon-de"></i>
+										</td>
+										<td>Amerika</td>
+										<td class="text-right"> 800 </td>
+										<td class="text-right font-weight-medium"> 33.25% </td>
+									</tr>
+									<tr>
+										<td>
+											<i class="flag-icon flag-icon-au"></i>
+										</td>
+										<td>Almanya</td>
+										<td class="text-right"> 760 </td>
+										<td class="text-right font-weight-medium"> 15.45% </td>
+									</tr>
+									<tr>
+										<td>
+											<i class="flag-icon flag-icon-gb"></i>
+										</td>
+										<td>Avustralya</td>
+										<td class="text-right"> 450 </td>
+										<td class="text-right font-weight-medium"> 25.00% </td>
+									</tr>
+									<tr>
+										<td>
+											<i class="flag-icon flag-icon-ro"></i>
+										</td>
+										<td>İngiltere</td>
+										<td class="text-right"> 620 </td>
+										<td class="text-right font-weight-medium"> 10.25% </td>
+									</tr>
+									<tr>
+										<td>
+											<i class="flag-icon flag-icon-br"></i>
+										</td>
+										<td>Romanya</td>
+										<td class="text-right"> 230 </td>
+										<td class="text-right font-weight-medium"> 75.00% </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<div id="audience-map" class="vector-map"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	

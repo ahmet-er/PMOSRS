@@ -1,10 +1,13 @@
-﻿using PMOSRS.Data.Core.Business.Base;
+﻿//using Microsoft.IdentityModel.Tokens;
+using PMOSRS.Data.Core.Business.Base;
 using PMOSRS.Data.Core.Repository;
 using PMOSRS.Model.Models.Entities;
 using PMOSRS.Model.Models.Items;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PMOSRS.Data.Core.Services.Token;
+
 
 namespace PMOSRS.Data.Core.Business
 {
@@ -46,6 +49,25 @@ namespace PMOSRS.Data.Core.Business
             if (res.Data != null)
             {
                 res.Data = T;
+                return await _userRepository.AsyncDuzelt(res.Data);
+            }
+            else
+            {
+                return res;
+            }
+        }
+
+        public override async Task<ResultItem<t_Users>> GetToken(LoginItem T)
+        {
+            ResultItem<object> resultItem = new ResultItem<object>();
+            var res = await _userRepository.AsyncGetir(x => x.Email == T.Email && x.Password == T.Password);
+            if (res.Data != null)//burada token verilecek
+            {
+                
+
+                string token="1";
+                res.Data = token;// token res.Data ya girilecek eğer hata alınırsa
+               // res.StatusCode = System.Net.HttpStatusCode.FailedDependency //buraya araştır gir
                 return await _userRepository.AsyncDuzelt(res.Data);
             }
             else

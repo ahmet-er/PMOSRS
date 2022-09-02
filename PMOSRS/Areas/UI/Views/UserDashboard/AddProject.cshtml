@@ -1,0 +1,30 @@
+﻿@{
+	ViewData["Title"] = "AddProject";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row justify-content-center mt-5">
+
+	<div class="col-md-8 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body bg-dark">
+				<h4 class="card-title text-light">Proje Ekle</h4>
+				<p class="card-description text-light"> Proje adını ve açıklamasını giriniz. </p>
+				<form class="forms-sample text-light">
+					<div class="form-group">
+						<label for="exampleInputProjectName">Proje Adı</label>
+						<input type="text" class="form-control" id="exampleInputProjectName" placeholder="Proje Adı">
+					</div>
+					<div class="form-group">
+						<label for="textareaProjectDescription">Proje Açıklaması</label>
+						<textarea class="form-control" placeholder="Proje Açıklaması" id="textareaProjectDescription" style="height: 50vh"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary mr-2 mt-3">Kaydet</button>
+					<button class="btn btn-outline-danger mt-3 mx-3">İptal</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+
