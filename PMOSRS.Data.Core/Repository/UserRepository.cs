@@ -5,5 +5,5 @@ namespace PMOSRS.Data.Core.Repository
 {
     public class UserRepository : EFRepository<t_Users, PMOSRSContext>
     {
-    }
+	}
 }

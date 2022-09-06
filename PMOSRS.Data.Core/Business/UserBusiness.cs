@@ -1,4 +1,5 @@
 ﻿//using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
 using PMOSRS.Data.Core.Business.Base;
 using PMOSRS.Data.Core.Repository;
 using PMOSRS.Model.Models.Entities;
@@ -6,8 +7,6 @@ using PMOSRS.Model.Models.Items;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PMOSRS.Data.Core.Services.Token;
-
 
 namespace PMOSRS.Data.Core.Business
 {
@@ -17,7 +16,7 @@ namespace PMOSRS.Data.Core.Business
 
         public UserBusiness(UserRepository userRepository)
         {
-            _userRepository = userRepository;   
+            _userRepository = userRepository;
         }
 
         public override async Task<ResultItem<t_Users>> Add(t_Users T)
@@ -56,24 +55,40 @@ namespace PMOSRS.Data.Core.Business
                 return res;
             }
         }
+        
+        //public override async Task<ResultItem<t_Users>> GetToken(LoginItem T)
+        //{
+        //    ResultItem<object> resultItem = new ResultItem<object>();
+        //    var res = await _userRepository.AsyncGetir(x => x.Email == T.Email && x.Password == T.Password);
+        //    if (res.Data != null)//burada token verilecek
+        //    {
+        //        var tokenHandler = new JwtSecurityTokenHandler();
+        //        var tokenKey = Encoding.UTF8.GetBytes(_configuration["JWT:Key"]);
+        //        var tokenDescriptor = new SecurityTokenDescriptor
+        //        {
+        //            Subject = new ClaimsIdentity(new Claim[]
+        //            {
+        //                new Claim(ClaimTypes.Name, T.Email)
+        //            }),
+        //            Expires = DateTime.UtcNow.AddMinutes(10),
+        //            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+        //        };
 
-        public override async Task<ResultItem<t_Users>> GetToken(LoginItem T)
-        {
-            ResultItem<object> resultItem = new ResultItem<object>();
-            var res = await _userRepository.AsyncGetir(x => x.Email == T.Email && x.Password == T.Password);
-            if (res.Data != null)//burada token verilecek
-            {
-                
+        //        var token = tokenHandler.CreateToken(tokenDescriptor);
+        //        //return new Tokens { Token = tokenHandler.WriteToken(token) };
 
-                string token="1";
-                res.Data = token;// token res.Data ya girilecek eğer hata alınırsa
-               // res.StatusCode = System.Net.HttpStatusCode.FailedDependency //buraya araştır gir
-                return await _userRepository.AsyncDuzelt(res.Data);
-            }
-            else
-            {
-                return res;
-            }
-        }
+        //        res.StatusCode = System.Net.HttpStatusCode.FailedDependency;
+        //        return tokenHandler.WriteToken(token);
+        //        /*res.Data = new BuildToken().CreateToken;*/// token res.Data ya girilecek eğer hata alınırsa
+        //                                                    // res.StatusCode = System.Net.HttpStatusCode.FailedDependency //buraya araştır gir
+        //                                                    //return await _userRepository.AsyncDuzelt(res.Data);
+        //    }
+        //    else
+        //    {
+        //        return res;
+        //    }
+
+        //}
+
     }
 }

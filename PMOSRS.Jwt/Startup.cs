@@ -41,7 +41,7 @@ namespace PMOSRS.Jwt
 				x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
 				{
 					ValidIssuer = "http://localhost",
-					ValidateAudience = "http://localhost", 
+					ValidAudience = "http://localhost", 
 					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("aspnetcorepmosrs")),
 					ValidateIssuerSigningKey = true,
 					ValidateLifetime = true,
@@ -62,6 +62,7 @@ namespace PMOSRS.Jwt
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>

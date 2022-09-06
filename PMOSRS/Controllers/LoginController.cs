@@ -10,5 +10,10 @@ namespace PMOSRS.Controllers
 		{
 			return View();
 		}
+		[HttpGet("Login1")]
+		public IActionResult Login1()
+		{
+			return View();
+		}
 	}
 }

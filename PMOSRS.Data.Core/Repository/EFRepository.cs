@@ -278,9 +278,25 @@ namespace PMOSRS.Data.Core.Repository
             }
             return m;
         }
-        // todo: InterFaceye Ekle Eklenmeyenleri -oten
+		// todo: InterFaceye Ekle Eklenmeyenleri -oten
 
-        public async Task<ResultItem<List<TEntity>>> AsyncEkleListe(List<TEntity> ent)
+		//public async Task<ResultItem<TEntity>> AsyncGetToken(Expression<Func<TEntity, bool>> filtre = null, bool isTracking = true)
+		//{
+		//	ResultItem<List<TEntity>> m = new ResultItem<List<TEntity>>();
+		//	try
+		//	{
+
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		m.StatusCode = System.Net.HttpStatusCode.Unauthorized;
+		//		m.Message = ex.Message + Environment.NewLine + ex.StackTrace;
+		//		log.Add(($"JWT Token Oluşturma Hatası"), ex.StackTrace);
+		//	}
+		//	return m;
+		//}
+
+		public async Task<ResultItem<List<TEntity>>> AsyncEkleListe(List<TEntity> ent)
         {
             ResultItem<List<TEntity>> m = new ResultItem<List<TEntity>>();
             try

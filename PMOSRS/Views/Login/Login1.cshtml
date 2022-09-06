@@ -1,17 +1,10 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    ViewData["Title"] = "Login1";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
 
-<html>
-<head>
-	<meta name="viewport" content="width=device-width" />
-	<title>Login</title>
-	<link src="~/lib/twitter-bootstrap/css/bootstrap.css/" />
-	<script src="~/lib/jquery/jquery361/jquery.js/"></script>
-	<script src="~/lib/twitter-bootstrap/js/bootstrap.js/"></script>
-	<script src="~/lib/popper/umd/popper.js/"></script>
-</head>
-<body class="d-flex flex-column h-100 bg-light">
-
-	<div class="container-scroller mt-auto">
+<div class="container-scroller mt-auto">
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth px-0">
 				<div class="row w-100 mx-0">
@@ -41,8 +34,7 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
-</body>
-</html>
+
 <script>
 	$(document).ready(function() {
 

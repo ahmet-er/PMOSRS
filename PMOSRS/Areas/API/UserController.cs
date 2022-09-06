@@ -48,11 +48,11 @@ namespace PMOSRS.Areas.API
         {
             return Json(await _userBusiness.Select());
         }
-        [HttpGet("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginItem loginItem)
-        {
-            return Json(await _userBusiness.GetToken(loginItem));
-        }
+		//[HttpGet("Login")]
+		//public async Task<IActionResult> Login([FromBody] LoginItem loginItem)
+		//{
+		//	return Json(await _userBusiness.GetToken(loginItem));
+		//}
 
-    }
+	}
 }

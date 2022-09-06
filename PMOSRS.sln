@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMOSRS.Model", "PMOSRS.Mode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMOSRS.Data.Core", "PMOSRS.Data.Core\PMOSRS.Data.Core.csproj", "{D50D43E8-B731-4A63-944B-5471102AA9CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMOSRS.Jwt", "PMOSRS.Jwt\PMOSRS.Jwt.csproj", "{7B1E96B5-8B9F-4CF1-BEAD-F902E231857A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{D50D43E8-B731-4A63-944B-5471102AA9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D50D43E8-B731-4A63-944B-5471102AA9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D50D43E8-B731-4A63-944B-5471102AA9CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B1E96B5-8B9F-4CF1-BEAD-F902E231857A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B1E96B5-8B9F-4CF1-BEAD-F902E231857A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B1E96B5-8B9F-4CF1-BEAD-F902E231857A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B1E96B5-8B9F-4CF1-BEAD-F902E231857A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
