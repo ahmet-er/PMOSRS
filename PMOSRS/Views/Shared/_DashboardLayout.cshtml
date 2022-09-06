@@ -7,172 +7,96 @@
 <html class="h-100">
 <head>
 	<meta name="viewport" content="width=device-width" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	@*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">*@
+	@*<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">*@
+	@*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">*@
+	<link rel="stylesheet" href="~/files/fonts/font-awesome.min.css" />
+	<link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="~/css/sidebars.css">
+	
 	<title>Dashboard</title>
 </head>
 <body class="d-flex flex-column h-100 bg-light">
-	<!--HOME NAVBAR-->
-	<nav class="navbar navbar-expand-lg bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="/UI/UserDashboard/Index">
-				<img src="~/files/images/PMOSRS-logos_white1.png" alt="" height="auto" width="50%vw">
-			</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="d-flex flex-row-reverse" id="navbarNavAltMarkup">
-				<div class="d-flex justify-content-end ">
-					<a class="btn btn-outline-light btn-lg" href="#" role="button">- 1 -</a>
-					<a class="btn btn-outline-danger btn-lg" href="#" role="button" style="margin-left:25px">Çıkış Yap</a>
 
-
-
-
-				</div>
-
+	<!--SIDENAV-->
+	<div class="wrapper d-flex align-items-stretch" style="height:100%">
+		
+			<div class="flex-shrink-0 p-3 bg-white col-sm-2" >
+				<a href="/Dashboard/Index" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+					<img src="~/files/images/PMOSRS-logos_black.png" alt="" height="auto" width="100%vw">
+				</a>
+				<ul class="list-unstyled ps-0">
+					<li class="mb-1">
+						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#project-collapse" aria-expanded="true">
+							Projeler
+						</button>
+						<div class="collapse show" id="project-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+								<li><a href="#" class="link-dark rounded">Proje Girişi</a></li>
+								<li><a href="/Dashboard/Project" class="link-dark rounded">Proje Listesi</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="mb-1">
+						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#ts-collapse" aria-expanded="true">
+							Teknik Şartnameler
+						</button>
+						<div class="collapse show" id="ts-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+								<li><a href="#" class="link-dark rounded">TŞ Girişi</a></li>
+								<li><a href="#" class="link-dark rounded">TŞ Listesi</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="mb-1">
+						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#tid-collapse" aria-expanded="true">
+							Teknik İsterler
+						</button>
+						<div class="collapse show" id="tid-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+								<li><a href="#" class="link-dark rounded">TID Girişi</a></li>
+								<li><a href="#" class="link-dark rounded">TID Listesi</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="mb-1">
+						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#srs-collapse" aria-expanded="true">
+							Yazılım Gereksinimleri
+						</button>
+						<div class="collapse show" id="srs-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+								<li><a href="#" class="link-dark rounded">SRS Girişi</a></li>
+								<li><a href="#" class="link-dark rounded">SRS Listesi</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="border-top my-3"></li>
+					<li class="mb-1">
+						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+							Genel Ayarlar
+						</button>
+						<div class="collapse" id="account-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+								<li><a href="#" class="link-dark rounded">Parametre</a></li>
+								<li><a href="#" class="link-dark rounded">Kullanıcı Tanımla</a></li>
+								<li><a href="#" class="link-dark rounded">Kullanıcı Listele</a></li>
+								<li><a href="#" class="link-dark rounded">Raporlar</a></li>
+								<li><a href="#" class="link-danger rounded">Çıkış Yap</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
 			</div>
-		</div>
-	</nav>
-	<div class="container-fluid">
-		<div class="div-space"></div>
-	</div>
 
-	<!-- SLIDE BAR-->
-	<div class="container-fluid">
-		<div class="row flex-nowrap">
-			<div class="col-auto px-sm-2 px-0 bg-dark">
-				<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-					<a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-						<span class="fs-5 d-none d-sm-inline">Menü</span>
-					</a>
-					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-						<!-- anasayfa -->
-						<li class="nav-item">
-							<a href="/UI/UserDashboard/Index" class="nav-link align-middle px-0">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house text-light" viewBox="0 0 16 16">
-									<path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-									<path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-								</svg> <span class="ms-1 d-none d-sm-inline text-light">Anasayfa</span>
-							</a>
-						</li>
-						<!-- projeler -->
-						<li>
-							<a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-laptop text-light" viewBox="0 0 16 16">
-									<path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5h11zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2h-11zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5z" />
-								</svg> <span class="ms-1 d-none d-sm-inline text-light">Projeler</span>
-							</a>
-							<ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-								<li class="w-100">
-									<a href="/UI/UserDashboard/AddProject" class="nav-link px-0"><span class="d-none d-sm-inline text-light mx-3">1. Proje Girişi</span>  </a>
-								</li>
-								<li>
-									<a href="/UI/UserDashboard/ListProject" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">2. Proje Listesi</span> </a>
-								</li>
-							</ul>
-						</li>
-						<!-- teknik şartnameler -->
 
-						<li>
-							<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text text-light" viewBox="0 0 16 16">
-									<path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
-									<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-								</svg> <span class="ms-1 d-none d-sm-inline text-light">Teknik Şartnameler</span>
-							</a>
-							<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-								<li class="w-100">
-									<a href="/UI/UserDashboard/AddTS" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">1. Teknik Şartname Girişi</span>  </a>
-								</li>
-								<li>
-									<a href="/UI/UserDashboard/ListTS" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">2. Teknik Şartname Listesi</span> </a>
-								</li>
-							</ul>
-						</li>
-						<!-- teknik isterler -->
-						<li>
-							<a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text text-light" viewBox="0 0 16 16">
-									<path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
-									<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-								</svg> <span class="ms-1 d-none d-sm-inline text-light">Teknik İsterler</span>
-							</a>
-							<ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-								<li class="w-100">
-									<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">1. Teknik İster Girişi</span>  </a>
-								</li>
-								<li>
-									<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">2. Teknik İster Listesi</span> </a>
-								</li>
-							</ul>
-						</li>
-						<!-- yazılım gereksinimleri -->
-						<li>
-							<a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text text-light" viewBox="0 0 16 16">
-									<path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z" />
-									<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-								</svg> <span class="ms-1 d-none d-sm-inline text-light">Yazılım Gereksinimleri</span>
-							</a>
-							<ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
-								<li class="w-100">
-									<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">1. Yazılım Gereksinim Girişi</span>  </a>
-								</li>
-								<li>
-									<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">2. Yazılım Gereksinim Listesi</span> </a>
-								</li>
-							</ul>
-						</li>
-						<!-- genel ayarlar -->
-
-						<a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear text-light" viewBox="0 0 16 16">
-								<path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
-								<path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
-							</svg> <span class="ms-1 d-none d-sm-inline text-light">Genel Ayarlar</span>
-						</a>
-						<ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
-							<li class="w-100">
-								<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">1. Parametreler</span></a>
-							</li>
-							<li>
-								<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">2. Kullanıcı Tanımlama</span></a>
-							</li>
-							<li>
-								<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">3. Kullanıcı Listeleme</span></a>
-							</li>
-							<li>
-								<a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline text-light mx-3">4. Raporlar</span></a>
-							</li>
-						</ul>
-
-					</ul>
-					<hr>
-					<!-- en altta profil fotosu artı dropdown button-->
-					@*<div class="dropdown pb-4">
-						<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-							<span class="d-none d-sm-inline mx-1">Ahmet Er</span>
-						</a>
-						<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-							<li><a class="dropdown-item" href="#">New project...</a></li>
-							<li><a class="dropdown-item" href="#">Settings</a></li>
-							<li><a class="dropdown-item" href="#">Profile</a></li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li><a class="dropdown-item" href="#">Sign out</a></li>
-						</ul>
-					</div>*@
-				</div>
-			</div>
-			<div class="col py-3">
-
+			<!-- Page Content  -->
+			<div id="content" class="p-4 p-md-5 pt-5 col-sm-10">
 				@RenderBody()
-
 			</div>
-		</div>
 	</div>
+
+
 
 
 
@@ -243,10 +167,11 @@
 	</footer>
 
 </body>
-@*<script src="js/DashboardSideBar.js"></script>*@
-<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-<script src="assets/vendors/js/vendor.bundle.base.js"></script>
-<script src="assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
-<script src="assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+@*<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+	<script src="~/lib/jquery/jquery361/jquery.js/"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>*@
+<script src="~/lib/jquery361/jquery.js"></script>
+<script src="~/js/sidebars.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+<script src="~/lib/popper/umd/popper.js"></script>
 </html>
