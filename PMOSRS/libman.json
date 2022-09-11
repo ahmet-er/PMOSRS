@@ -14,7 +14,16 @@
     {
       "library": "jquery@3.6.1",
       "destination": "wwwroot/lib/jquery361/"
+    },
+    {
+      "library": "bootstrap-table@1.21.0",
+      "destination": "wwwroot/lib/bootstrap-table/"
+    },
+    {
+      "library": "jquery.serializeJSON@3.2.1",
+      "destination": "wwwroot/lib/jquery-serializeJSON/"
     }
+
 
   ]
 }

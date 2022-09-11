@@ -15,5 +15,11 @@ namespace PMOSRS.Controllers
         {
             return View();
         }
+        [HttpGet("TS")]
+        public IActionResult TS()
+        {
+            return View();
+        }
+
     }
 }

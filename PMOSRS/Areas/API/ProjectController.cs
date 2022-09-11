@@ -35,8 +35,8 @@ namespace PMOSRS.Areas.API
             return Json(await _projectBusiness.Update(entity));
         }
 
-        [HttpPost("Remove")]
-        public async Task<IActionResult> Remove([FromBody] Guid id)
+        [HttpGet("Remove")]
+        public async Task<IActionResult> Remove(Guid id)
         {
             return Json(await _projectBusiness.Delete(id));
         }

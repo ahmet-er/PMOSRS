@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "TS";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+	<div class="col-sm-10">
+		<!-- Toolbar - Project Table Toolbar-->
+		<div id="toolbar">
+			<button id="idAddBtn" class="btn btn-primary btn-lg">Ekle</button>
+			<button id="idEditBtn" class="btn btn-primary btn-lg" style="margin-left: 10px;">Güncelle</button>
+			<button id="idDeleteBtn" class="btn btn-danger btn-lg" style="margin-left: 10px;">Sil</button>
+
+		</div>
+
+		<!-- Table - Project Table -->
+		<table id="idProjectTable"
+			   class="table table-bordered table-hover"
+			   data-single-select="true"
+			   data-click-to-select="true"
+				data-sort-name="Name"
+				data-sort-order="desc"
+		data-search="true">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th class="col" data-field="ProjectId" data-sortable="true">Bağlı Proje</th>
+					<th class="col" data-field="Name" data-sortable="true">Teknik Şartname Adı</th>
+				</tr>
+			</thead>
+		</table>
+
+		<!-- Modal - Add, Update Modal -->
+		<div id="idAddUpdateModal" class="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Project</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="frmProject">
+							<div class="mb-3">
+								<label for="idprojectIdFrm" class="form-label">Bağlı Olduğu Proje</label>
+								<input id="idProjectIdFrm" name="ProjectId" placeholder="Bağlı Olduğu Proje" class="form-control form-control-lg" />
+							</div>
+							<div class="mb-3">
+								<label for="idNameFrm" class="form-label">Teknik Şartname Adı</label>
+								<input id="idNameFrm" name="Name" placeholder="Teknik Şartname Adı" class="form-control form-control-lg" type="text" />
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button id="idProjectSaveBtn" type="button" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

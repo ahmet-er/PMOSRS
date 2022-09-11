@@ -4,96 +4,99 @@
 
 <!DOCTYPE html>
 
-<html class="h-100">
+<html>
 <head>
 	<meta name="viewport" content="width=device-width" />
-	@*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">*@
-	@*<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">*@
-	@*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">*@
 	<link rel="stylesheet" href="~/files/fonts/font-awesome.min.css" />
 	<link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="~/lib/bootstrap-table/bootstrap-table.min.css" />
 	<link rel="stylesheet" href="~/css/sidebars.css">
-	
+	<script src="~/lib/jquery361/jquery.js"></script>
+	<script src="~/js/sidebars.js"></script>
+	<script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+	<script src="~/lib/popper/umd/popper.js"></script>
+	<script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="~/lib/jquery-serializeJSON/jquery.serializejson.js"></script>
+
 	<title>Dashboard</title>
 </head>
 <body class="d-flex flex-column h-100 bg-light">
 
 	<!--SIDENAV-->
 	<div class="wrapper d-flex align-items-stretch" style="height:100%">
-		
-			<div class="flex-shrink-0 p-3 bg-white col-sm-2" >
-				<a href="/Dashboard/Index" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-					<img src="~/files/images/PMOSRS-logos_black.png" alt="" height="auto" width="100%vw">
-				</a>
-				<ul class="list-unstyled ps-0">
-					<li class="mb-1">
-						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#project-collapse" aria-expanded="true">
-							Projeler
-						</button>
-						<div class="collapse show" id="project-collapse">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-								<li><a href="#" class="link-dark rounded">Proje Girişi</a></li>
-								<li><a href="/Dashboard/Project" class="link-dark rounded">Proje Listesi</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="mb-1">
-						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#ts-collapse" aria-expanded="true">
-							Teknik Şartnameler
-						</button>
-						<div class="collapse show" id="ts-collapse">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-								<li><a href="#" class="link-dark rounded">TŞ Girişi</a></li>
-								<li><a href="#" class="link-dark rounded">TŞ Listesi</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="mb-1">
-						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#tid-collapse" aria-expanded="true">
-							Teknik İsterler
-						</button>
-						<div class="collapse show" id="tid-collapse">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-								<li><a href="#" class="link-dark rounded">TID Girişi</a></li>
-								<li><a href="#" class="link-dark rounded">TID Listesi</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="mb-1">
-						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#srs-collapse" aria-expanded="true">
-							Yazılım Gereksinimleri
-						</button>
-						<div class="collapse show" id="srs-collapse">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-								<li><a href="#" class="link-dark rounded">SRS Girişi</a></li>
-								<li><a href="#" class="link-dark rounded">SRS Listesi</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="border-top my-3"></li>
-					<li class="mb-1">
-						<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-							Genel Ayarlar
-						</button>
-						<div class="collapse" id="account-collapse">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-								<li><a href="#" class="link-dark rounded">Parametre</a></li>
-								<li><a href="#" class="link-dark rounded">Kullanıcı Tanımla</a></li>
-								<li><a href="#" class="link-dark rounded">Kullanıcı Listele</a></li>
-								<li><a href="#" class="link-dark rounded">Raporlar</a></li>
-								<li><a href="#" class="link-danger rounded">Çıkış Yap</a></li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</div>
+
+		<div class="flex-shrink-0 p-3 bg-white col-sm-2">
+			<a href="/Dashboard/Index" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+				<img src="~/files/images/PMOSRS-logos_black.png" alt="" height="auto" width="100%vw">
+			</a>
+			<ul class="list-unstyled ps-0">
+				<li class="mb-1">
+					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#project-collapse" aria-expanded="true">
+						Projeler
+					</button>
+					<div class="collapse show" id="project-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+							<li><a href="#" class="link-dark rounded">Proje Girişi</a></li>
+							<li><a href="/Dashboard/Project" class="link-dark rounded">Proje Listesi</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="mb-1">
+					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#ts-collapse" aria-expanded="true">
+						Teknik Şartnameler
+					</button>
+					<div class="collapse show" id="ts-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+							<li><a href="#" class="link-dark rounded">TŞ Girişi</a></li>
+							<li><a href="/Dashboard/TS" class="link-dark rounded">TŞ Listesi</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="mb-1">
+					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#tid-collapse" aria-expanded="true">
+						Teknik İsterler
+					</button>
+					<div class="collapse show" id="tid-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+							<li><a href="#" class="link-dark rounded">TID Girişi</a></li>
+							<li><a href="#" class="link-dark rounded">TID Listesi</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="mb-1">
+					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#srs-collapse" aria-expanded="true">
+						Yazılım Gereksinimleri
+					</button>
+					<div class="collapse show" id="srs-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+							<li><a href="#" class="link-dark rounded">SRS Girişi</a></li>
+							<li><a href="#" class="link-dark rounded">SRS Listesi</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="border-top my-3"></li>
+				<li class="mb-1">
+					<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+						Genel Ayarlar
+					</button>
+					<div class="collapse" id="account-collapse">
+						<ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
+							<li><a href="#" class="link-dark rounded">Parametre</a></li>
+							<li><a href="#" class="link-dark rounded">Kullanıcı Tanımla</a></li>
+							<li><a href="#" class="link-dark rounded">Kullanıcı Listele</a></li>
+							<li><a href="#" class="link-dark rounded">Raporlar</a></li>
+							<li><a href="#" class="link-light rounded bg-danger">Çıkış Yap</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
 
 
-			<!-- Page Content  -->
-			<div id="content" class="p-4 p-md-5 pt-5 col-sm-10">
-				@RenderBody()
-			</div>
+		<!-- Page Content  -->
+		<div id="content" class="p-4 p-md-5 pt-5 col-sm-10">
+			@RenderBody()
+		</div>
 	</div>
 
 
@@ -167,11 +170,6 @@
 	</footer>
 
 </body>
-@*<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-	<script src="~/lib/jquery/jquery361/jquery.js/"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>*@
-<script src="~/lib/jquery361/jquery.js"></script>
-<script src="~/js/sidebars.js"></script>
-<script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
-<script src="~/lib/popper/umd/popper.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>*@
+
 </html>
