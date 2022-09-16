@@ -1,0 +1,298 @@
+﻿@{
+	ViewData["Title"] = "TID";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+	<div class="col-sm-10">
+		<!-- Toolbar - TID Table Toolbar-->
+		<div id="toolbar">
+			<button id="idAddBtn" class="btn btn-labeled btn-primary ">
+				<span class="btn-label"><i class="bi bi-plus-lg"></i></span> Ekle
+			</button>
+			<button id="idEditBtn" class="btn btn-labeled btn-success" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-pencil-square"></i></span> Güncelle
+			</button>
+			<button id="idDeleteBtn" class="btn btn-labeled btn-danger" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-trash"></i></span> Sil
+			</button>
+		</div>
+
+		<!-- Table - TID Table -->
+		<table id="idTIDTable"
+			   class="table table-bordered table-hover"
+			   data-single-select="true"
+			   data-click-to-select="true"
+			   data-sort-name="name"
+			   data-sort-order="desc"
+			   data-search="true"
+			   data-pagination="true">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th class="col" data-field="TS.Name">Bağlı Olduğu TŞ Adı</th>
+					<th class="col" data-field="WorkItemCode">TID Work Item Code</th>
+					<th class="col" data-field="Tags">TID Tags</th>
+					<th class="col" data-field="RelScope">TID Rel Scope</th>
+					<th class="col" data-field="Title">TID Başlık</th>
+					<th class="col" data-field="Description">TID Açıklama</th>
+					<th class="col" data-field="TIDStates.Name">TID Durum Adı</th>
+					<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>
+				</tr>
+			</thead>
+		</table>
+
+		<!-- Modal - Add, Update Modal -->
+		<div id="idAddUpdateModal" class="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Teknik İster</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="frmTID">
+							<div class="mb-3">
+								<input id="idIdFrm" name="Id" placeholder="Id" class="form-control form-control-lg" type="text" hidden />
+								<input id="idTSIdFrm" name="TSId" placeholder="TSId" class="form-control form-control-lg" type="text" hidden />
+							</div>
+							<div class="mb-3">
+								<button id="idSelectTSNameBtn" type="button" class="btn btn-labeled btn-outline-success">
+									<span class="btn-label"><i class="bi bi-card-list"></i></span> Projeyi Seçiniz
+								</button><br />
+								<label class="form-label">Bağlı Olduğu Teknik Şartname Adı</label><br />
+								<input id="idTSNameFrm" name="TS" placeholder="Teknik İstere Bağlı Teknik Şartname Adı" class="form-control form-control-lg" type="text" readonly />
+							</div>
+							<div class="mb-3">
+								<label for="idWorkItemCodeFrm" class="form-label">Work Item Code</label>
+								<input id="idWorkItemCodeFrm" name="WorkItemCode" placeholder="Work Item Code" class="form-control form-control-lg" type="text" />
+							</div>
+							<div class="mb-3">
+								<label for="idTagsFrm" class="form-label">Tags</label>
+								<input id="idTagsFrm" name="Tags" placeholder="Tags" class="form-control form-control-lg" type="text" />
+							</div>
+							<div class="mb-3">
+								<label for="idRelScopeFrm" class="form-label">Rel Scope</label>
+								<input id="idRelScopeFrm" name="RelScope" placeholder="Rel Scope" class="form-control form-control-lg" type="text" />
+							</div>
+							<div class="mb-3">
+								<label for="idTitleFrm" class="form-label">Title</label>
+								<input id="idTitleFrm" name="Title" placeholder="Title" class="form-control form-control-lg" type="text" />
+							</div>
+							<div class="mb-3">
+								<label for="idDescriptionFrm" class="form-label">Teknik İster Açıklaması</label>
+								<textarea id="idDescriptionFrm" name="Description" placeholder="Teknik İster Açıklama" class="form-control form-control-lg"></textarea>
+								<span id="idDescriptionSpan" class="text text-danger"></span>
+
+							</div>
+							<div class="mb-3">
+								<label for="idTIDStatesNameFrm" class="form-label">TID Durum</label>
+								<input id="idTIDStatesNameFrm" name="TIDStates" placeholder="TID Durum Seçiniz" class="form-control form-control-lg" type="text" />
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+							<span class="btn-label"><i class="bi bi-x-lg"></i></span> Vazgeç
+						</button>
+						<button id="idTIDSaveBtn" type="button" class="btn btn-labeled btn-primary">
+							<span class="btn-label"><i class="bi bi-save"></i></span> Kaydet
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal - Select TS Modal -->
+		<div id="idSelectTSModal" class="modal fade modal-lg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Lütfen Bağlı Teknik Şartnameyi Seçiniz</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<!-- Table - Project Table -->
+						<table id="idTSTable"
+							   class="table table-bordered table-hover"
+							   data-single-select="true"
+							   data-click-to-select="true"
+							   data-search="true"
+							   data-sort-name="name"
+							   data-sort-order="desc"
+							   data-pagination="true">
+							@*data-filter-control="true"
+							data-show-search-clear-button="true"*@
+
+							<thead>
+								<tr>
+									<th data-field="state" data-checkbox="true"></th>
+									<th class="col" data-field="Name" data-sortable="true">Teknik Şartname Adı</th>
+									<th class="col" data-field="Projects.Name">Proje Adı</th>
+									<th class="col" data-field="Projects.Description">Proje Açıklama</th>
+									<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+							<span class="btn-label"><i class="bi bi-x-lg"></i></span> Vazgeç
+						</button>
+						<button id="idGetTSBtn" type="button" class="btn btn-labeled btn-success">
+							<span class="btn-label"><i class="bi bi-check-lg"></i></span> Seç
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	$(document).ready(function() {
+
+		Listele();
+
+		$("#idDeleteBtn").click(function() {
+			var selectData = $("#idTIDTable").bootstrapTable("getSelections")[0];
+			Sil(selectData.Id);
+		});
+
+		$("#idAddBtn").click(function() {
+			var _object = { Id: "", TSId: "", TS: "", WorkItemCode: "", Tags: "", RelScope: "", Title: "", Description: "", TIDStates: "" };
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idEditBtn").click(function() {
+			var _object = $("#idTIDTable").bootstrapTable("getSelections")[0];
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idTIDSaveBtn").click(function() {
+			Save();
+			$("#idAddUpdateModal").modal("hide");
+		});
+
+		$("#idSelectTSNameBtn").click(function() {
+			$("#idSelectTSModal").modal("show");
+			TSListele();
+		});
+
+		$("#idGetTSBtn").click(function() {
+			var _object = $("#idTSTable").bootstrapTable("getSelections")[0];
+			$("#idSelectTSModal").modal("hide");
+			ObjectToModal(_object);
+		});
+	});
+
+	// Listele - Listeleme işlemi yapar
+	function Listele() {
+		$.ajax({
+			url: "/API/TID/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idTIDTable").bootstrapTable('load', result.Data);
+				$("#idTIDTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+
+	function TSListele() {
+		$.ajax({
+			url: "/API/TS/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idTSTable").bootstrapTable('load', result.Data);
+				$("#idTSTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+
+	// Sil - Silme işlemi yapar
+	function Sil(Id) {
+		$.ajax({
+			url: "/API/TID/Remove?Id=" + Id,
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+	// Save - Ekleme ve güncelleme işlemi yapar
+	function Save() {
+		var selectData = $("#idTIDTable").bootstrapTable("getSelections")[0];
+		var _url = "/API/TID/Add";
+
+        if ($("#idIdFrm").val() != "") {
+            _url = "/API/TID/Update";
+			var dt = JSON.stringify(FormToObject(selectData));
+        } else {
+			var _object = { Id: "", TSId: "", TSs: "", WorkItemCode: "", Tags: "", RelScope: "", Title: "", Description: "", TIDStates: "" };
+			var dt = JSON.stringify(FormToObject(_object));
+		}
+
+		$.ajax({
+			url: _url,
+			data: dt,
+			type: 'Post',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+
+	// ObjectToForm - Gönderilen nesneyi form elementlerine setler
+	function ObjectToForm(obj) {
+		$("#idIdFrm").val(obj.Id);
+		$("#idTSIdFrm").val(obj.TSId);
+		$("#idTSNameFrm").val(obj.TS.Name);
+		$("#idWorkItemCodeFrm").val(obj.WorkItemCode);
+		$("#idTagsFrm").val(obj.Tags);
+		$("#idRelScopeFrm").val(obj.RelScope);
+		$("#idTitleFrm").val(obj.Title);
+		$("#idDescriptionFrm").val(obj.Description);
+		$("#idTIDStatesFrm").val(obj.TIDStates);
+	}
+
+	// ObjectToModal - Seçilen Projeyi Modal Forma çeker
+	function ObjectToModal(obj) {
+		$("#idTSIdFrm").val(obj.Id);
+		$("#idTSNameFrm").val(obj.Name);
+	}
+
+	// FormToObject - Formdan nesneye setler
+	function FormToObject(obj) {
+		obj.Id = $("#idIdFrm").val();
+		obj.TSId = $("#idTSIdFrm").val();
+		obj.TS.Name = $("#idTSNameFrm").val();
+		obj.WorkItemCode = $("#idWorkItemCodeFrm").val();
+		obj.Tags = $("#idTagsFrm").val();
+		obj.RelScope = $("#idRelScopeFrm").val();
+		obj.Title = $("#idTitleFrm").val();
+		obj.Description = $("#idDescriptionFrm").val();
+		obj.TIDStates = $("#idTIDStatesNameFrm").val();
+		return obj;
+	}
+
+</script>

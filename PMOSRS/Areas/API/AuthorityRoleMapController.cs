@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace PMOSRS.Areas.API
 {
     [Area("API")]
+    [Route("API/[Controller]")]
     public class AuthorityRoleMapController : BaseController
     {
         private readonly AuthorityRoleMapRepository _authorityRoleMapRepository;
@@ -32,13 +33,13 @@ namespace PMOSRS.Areas.API
             return Json(await _authorityRoleMapBusiness.Update(entity));
         }
 
-        [HttpPost("Remove")]
-        public async Task<IActionResult> Remove([FromBody] Guid id)
+        [HttpGet("Remove")]
+        public async Task<IActionResult> Remove(Guid id)
         {
             return Json(await _authorityRoleMapBusiness.Delete(id));
         }
 
-        [HttpPost("List")]
+        [HttpGet("List")]
         public async Task<IActionResult> List()
         {
             return Json(await _authorityRoleMapBusiness.Select());

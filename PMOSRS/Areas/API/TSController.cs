@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace PMOSRS.Areas.API
 {
     [Area("API")]
+    [Route("API/[Controller]")]
     public class TSController : BaseController
     {
         private readonly TSRepository _tSRepository;
@@ -19,7 +20,7 @@ namespace PMOSRS.Areas.API
             _tSRepository = tSRepository;
             _tSBusiness = new TSBusiness(_tSRepository);
         }
-        
+
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] t_TSs entity)
         {
@@ -32,16 +33,19 @@ namespace PMOSRS.Areas.API
             return Json(await _tSBusiness.Update(entity));
         }
 
-        [HttpPost("Remove")]
-        public async Task<IActionResult> Remove([FromBody] Guid id)
+        [HttpGet("Remove")]
+        public async Task<IActionResult> Remove(Guid id)
         {
             return Json(await _tSBusiness.Delete(id));
         }
 
-        [HttpPost("List")]
+        [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            return Json(await _tSBusiness.Select());
+            //var query = from m in _tSBusiness
+            //            join pi in _tSBusiness on
+            //            m.ProjectId equals pi.ProjectId
+            return Json(await _tSBusiness.IliskiliSelect());
         }
     }
 }

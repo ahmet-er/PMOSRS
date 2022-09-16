@@ -7,7 +7,7 @@ namespace PMOSRS.Model.Models.Entities
 {
     public class t_TSs : BaseEntity
     {
-        [Required, MaxLength(36), Display(Name = "Project Id")]
+        [Required, Display(Name = "Project Id")]
         public Guid ProjectId { get; set; }
         [ForeignKey("ProjectId")]
         public virtual t_Projects Projects { get; set; }

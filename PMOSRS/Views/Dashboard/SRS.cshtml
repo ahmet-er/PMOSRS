@@ -1,0 +1,296 @@
+﻿@{
+	ViewData["Title"] = "SRS";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+	<div class="col-sm-10">
+		<!-- Toolbar - SRS Table Toolbar-->
+		<div id="toolbar">
+			<button id="idAddBtn" class="btn btn-labeled btn-primary ">
+				<span class="btn-label"><i class="bi bi-plus-lg"></i></span> Ekle
+			</button>
+			<button id="idEditBtn" class="btn btn-labeled btn-success" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-pencil-square"></i></span> Güncelle
+			</button>
+			<button id="idDeleteBtn" class="btn btn-labeled btn-danger" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-trash"></i></span> Sil
+			</button>
+		</div>
+
+		<!-- Table - SRS Table -->
+		<table id="idSRSTable"
+			   class="table table-bordered table-hover"
+			   data-single-select="true"
+			   data-click-to-select="true"
+			   data-sort-name="name"
+			   data-sort-order="desc"
+			   data-search="true"
+			   data-pagination="true">
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th class="col" data-field="TID.WorkItemCode">Bağlı Olduğu TID Kodu</th>
+					<th class="col" data-field="WorkItemCode">SRS Work Item Code</th>
+					<th class="col" data-field="Tags">SRS Tags</th>
+					<th class="col" data-field="RelScope">SRS Rel Scope</th>
+					@*<th class="col" data-field="Title">TID Başlık</th>*@
+					<th class="col" data-field="Description">SRS Açıklama</th>
+					<th class="col" data-field="SRSState.Name">SRS Durum Adı</th>
+					<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>
+				</tr>
+			</thead>
+		</table>
+
+		<!-- Modal - Add, Update Modal -->
+		<div id="idAddUpdateModal" class="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Yazılım Gereksinimi</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="frmSRS">
+							<div class="mb-3">
+								<input id="idIdFrm" name="Id" placeholder="Id" class="form-control form-control-lg" type="text" hidden />
+								<input id="idTIDIdFrm" name="TIDId" placeholder="TIDId" class="form-control form-control-lg" type="text" hidden />
+							</div>
+							<div class="mb-3">
+								<button id="idSelectTIDBtn" type="button" class="btn btn-labeled btn-outline-success">
+									<span class="btn-label"><i class="bi bi-card-list"></i></span> Bağlı TID'i Seçiniz
+								</button><br />
+								<label class="form-label">Bağlı Olduğu Teknik İsterin Kodu</label><br />
+								<input id="idTIDWorkItemCodeFrm" name="TIDWorkItemCode" placeholder="Yazılım Gereksinimine Bağlı Teknik İster Kodu" class="form-control form-control-lg" type="text" readonly />
+							</div>
+							<div class="mb-3">
+								<label for="idWorkItemCodeFrm" class="form-label">Work Item Code</label>
+								<input id="idWorkItemCodeFrm" name="WorkItemCode" placeholder="Work Item Code" class="form-control form-control-lg" type="text" />
+							</div>
+							<div class="mb-3">
+								<label for="idTagsFrm" class="form-label">Tags</label>
+								<input id="idTagsFrm" name="Tags" placeholder="Tags" class="form-control form-control-lg" type="text" />
+							</div>
+							<div class="mb-3">
+								<label for="idRelScopeFrm" class="form-label">Rel Scope</label>
+								<input id="idRelScopeFrm" name="RelScope" placeholder="Rel Scope" class="form-control form-control-lg" type="text" />
+							</div>
+							<div class="mb-3">
+								<label for="idDescriptionFrm" class="form-label">Teknik İster Açıklaması</label>
+								<textarea id="idDescriptionFrm" name="Description" placeholder="Yazılım Gereksinimi Açıklama" class="form-control form-control-lg"></textarea>
+								<span id="idDescriptionSpan" class="text text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label for="idSRSStatesNameFrm" class="form-label">SRS Durum</label>
+								<input id="idSRSStateNameFrm" name="SRSStates" placeholder="SRS Durum Seçiniz" class="form-control form-control-lg" type="text" />
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+							<span class="btn-label"><i class="bi bi-x-lg"></i></span> Vazgeç
+						</button>
+						<button id="idSRSSaveBtn" type="button" class="btn btn-labeled btn-primary">
+							<span class="btn-label"><i class="bi bi-save"></i></span> Kaydet
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal - Select TID Modal -->
+		<div id="idSelectTIDModal" class="modal fade modal-lg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Lütfen Bağlı Teknik İsteri Seçiniz</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<!-- Table - TID Table -->
+						<table id="idTIDTable"
+							   class="table table-bordered table-hover"
+							   data-single-select="true"
+							   data-click-to-select="true"
+							   data-search="true"
+							   data-sort-name="name"
+							   data-sort-order="desc"
+							   data-pagination="true">
+							@*data-filter-control="true"
+							data-show-search-clear-button="true"*@
+
+							<thead>
+								<tr>
+									<th data-field="state" data-checkbox="true"></th>
+									<th class="col" data-field="TS.Name">Bağlı Olduğu TŞ Adı</th>
+									<th class="col" data-field="WorkItemCode">TID Work Item Code</th>
+									<th class="col" data-field="Tags">TID Tags</th>
+									<th class="col" data-field="RelScope">TID Rel Scope</th>
+									<th class="col" data-field="Title">TID Başlık</th>
+									@*<th class="col" data-field="Description">TID Açıklama</th>*@
+									@*<th class="col" data-field="TIDStates.Name">TID Durum Adı</th>*@
+									@*<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>*@
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+							<span class="btn-label"><i class="bi bi-x-lg"></i></span> Vazgeç
+						</button>
+						<button id="idGetTIDBtn" type="button" class="btn btn-labeled btn-success">
+							<span class="btn-label"><i class="bi bi-check-lg"></i></span> Seç
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+
+		Listele();
+
+		$("#idDeleteBtn").click(function() {
+			var selectData = $("#idSRSTable").bootstrapTable("getSelections")[0];
+			Sil(selectData.Id);
+		});
+
+		$("#idAddBtn").click(function() {
+			var _object = { Id: "", TIDId: "", TID: "", WorkItemCode: "", Tags: "", RelScope: "", Description: "", TIDStates: "" };
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idEditBtn").click(function() {
+			var _object = $("#idSRSTable").bootstrapTable("getSelections")[0];
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idSRSSaveBtn").click(function() {
+			Save();
+			$("#idAddUpdateModal").modal("hide");
+		});
+
+		$("#idSelectTIDBtn").click(function() {
+			$("#idSelectTIDModal").modal("show");
+			TIDListele();
+		});
+
+		$("#idGetTIDBtn").click(function() {
+			var _object = $("#idTIDTable").bootstrapTable("getSelections")[0];
+			$("#idSelectTIDModal").modal("hide");
+			ObjectToModal(_object);
+		});
+	});
+
+	// Listele - Listeleme işlemi yapar
+	function Listele() {
+		$.ajax({
+			url: "/API/SRS/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idSRSTable").bootstrapTable('load', result.Data);
+				$("#idSRSTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+
+	function TIDListele() {
+		$.ajax({
+			url: "/API/TID/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idTIDTable").bootstrapTable('load', result.Data);
+				$("#idTIDTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+
+	// Sil - Silme işlemi yapar
+	function Sil(Id) {
+		$.ajax({
+			url: "/API/SRS/Remove?Id=" + Id,
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+	// Save - Ekleme ve güncelleme işlemi yapar
+	function Save() {
+		var selectData = $("#idSRSTable").bootstrapTable("getSelections")[0];
+		var _url = "/API/SRS/Add";
+
+        if ($("#idIdFrm").val() != "") {
+            _url = "/API/SRS/Update";
+			var dt = JSON.stringify(FormToObject(selectData));
+        } else {
+			var _object = { Id: "", TSId: "", TSs: "", WorkItemCode: "", Tags: "", RelScope: "", Description: "", TIDStates: "" };
+			var dt = JSON.stringify(FormToObject(_object));
+		}
+
+		$.ajax({
+			url: _url,
+			data: dt,
+			type: 'Post',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+
+	// ObjectToForm - Gönderilen nesneyi form elementlerine setler
+	function ObjectToForm(obj) {
+		$("#idIdFrm").val(obj.Id);
+		$("#idTIDIdFrm").val(obj.TIDId);
+		$("#idTIDNameFrm").val(obj.TID.WorkItemCode);
+		$("#idWorkItemCodeFrm").val(obj.WorkItemCode);
+		$("#idTagsFrm").val(obj.Tags);
+		$("#idRelScopeFrm").val(obj.RelScope);
+		//$("#idTitleFrm").val(obj.Title);
+		$("#idDescriptionFrm").val(obj.Description);
+		$("#idSRSStatesFrm").val(obj.TIDStates);
+	}
+
+	// ObjectToModal - Seçilen Projeyi Modal Forma çeker
+	function ObjectToModal(obj) {
+		$("#idTIDIdFrm").val(obj.Id);
+		$("#idTIDWorkItemCodeFrm").val(obj.WorkItemCode);
+	}
+
+	// FormToObject - Formdan nesneye setler
+	function FormToObject(obj) {
+		obj.Id = $("#idIdFrm").val();
+		obj.TIDId = $("#idTIDIdFrm").val();
+		obj.TID.WorkItemCode = $("#idTIDNameFrm").val();
+		obj.WorkItemCode = $("#idWorkItemCodeFrm").val();
+		obj.Tags = $("#idTagsFrm").val();
+		obj.RelScope = $("#idRelScopeFrm").val();
+		//obj.Title = $("#idTitleFrm").val();
+		obj.Description = $("#idDescriptionFrm").val();
+		obj.TIDStates = $("#idSRSStatesNameFrm").val();
+		return obj;
+	}
+
+</script>

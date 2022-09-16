@@ -1,0 +1,138 @@
+﻿@{
+	ViewData["Title"] = "Reports";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+  <section>
+    <div class="row">
+      <div class="col-2 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="bi bi-pencil card-icon text-primary"></i>
+              </div>
+              <div class="text-end">
+                <h3>278</h3>
+                <p class="mb-0">Proje Sayısı</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="bi bi-card-list card-icon text-warning"></i>
+              </div>
+              <div class="text-end">
+                <h3>156</h3>
+                <p class="mb-0">Teknik Şartname Sayısı</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="bi bi-card-list card-icon text-info"></i>
+              </div>
+              <div class="text-end">
+                <h3>234</h3>
+                <p class="mb-0">Teknik İster Sayısı</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="bi bi-card-list card-icon text-danger"></i>
+              </div>
+              <div class="text-end">
+                <h3>233</h3>
+                <p class="mb-0">Yazılım Gereksinimi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="bi bi-person-square card-icon text-success"></i>
+              </div>
+              <div class="text-end">
+                <h3>423</h3>
+                <p class="mb-0">Kullanıcı Sayısı</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between px-md-1">
+              <div class="align-self-center">
+                <i class="bi bi-file-earmark-pdf card-icon text-danger"></i>
+              </div>
+              <div class="text-end">
+                <h3>423</h3>
+                <p class="mb-0">Dosya Sayısı</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      
+       <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Pie Chart</h5>
+
+              <!-- Pie Chart -->
+              <div id="pieChart" style="min-height: 400px;" class="echart"></div>
+
+              <!-- End Pie Chart -->
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Donut Chart</h5>
+
+              <!-- Donut Chart -->
+              <div id="donutChart" style="min-height: 400px;" class="echart"></div>
+
+              
+              <!-- End Donut Chart -->
+
+            </div>
+          </div>
+        </div>
+
+      
+      
+    </div>
+    
+  </section>
+</div>

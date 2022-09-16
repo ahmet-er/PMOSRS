@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewData["Title"] = "Parameter";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+	<div class="col-sm-10">
+		<!-- Toolbar - Project Table Toolbar-->
+		<div id="toolbar">
+			<button id="idEditBtn" class="btn btn-labeled btn-success" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-pencil-square"></i></span> Güncelle
+			</button>
+		</div>
+
+		<!-- Table - Project Table -->
+		<table id="idSettingTable"
+			   class="table table-bordered table-hover mt-5"
+			   data-single-select="true"
+			   data-click-to-select="true">
+
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th class="col" data-field="Version" data-filter-control="input" data-sortable="true">Version</th>
+				</tr>
+			</thead>
+
+		</table>
+
+		<!-- Modal - Update Modal -->
+		<div id="idUpdateModal" class="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Ayarlar</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<form id="frmSetting" name="frmSetting" class="needs-validation" novalidate>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input id="idIdFrm" name="Id" placeholder="Id" class="form-control form-control-lg" type="text" hidden />
+							</div>
+
+							<div class="mb-3">
+								<label for="idVersionFrm" class="form-label">Proje Adı</label>
+								<input id="idVersionFrm" name="Version" placeholder="Proje Version" class="form-control form-control-lg" type="text" />
+								<span id="idVersionSpan" class="text text-danger"></span>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+								<span class="btn-label"><i class="bi bi-x-lg"></i></span> Vazgeç
+							</button>
+							<button id="idSaveBtn" type="button" class="btn btn-labeled btn-primary">
+								<span class="btn-label"><i class="bi bi-save"></i></span> Kaydet
+							</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+
+		Listele();
+
+		$("#idEditBtn").click(function() {
+			var _object = $("#idSettingTable").bootstrapTable("getSelections")[0];
+			ObjectToForm(_object);
+			$("#idUpdateModal").modal("show");
+		});
+
+		$("#idSaveBtn").click(function() {
+
+			var _version = $("#idVersionFrm").val()
+			if (_version == "") {
+				document.getElementById("idVersionSpan").innerHTML = "Lütfen Proje Adını Giriniz.";
+				return false;
+
+			} else if (_version.length > 50) {
+				document.getElementById("idVersionSpan").innerHTML = "Proje Adı En Fazla 50 Karakter Olabilir.";
+				return false;
+			} 
+			Save();
+			$("#idUpdateModal").modal("hide");
+		});
+
+
+	});
+
+	// Listele - Listeleme işlemi yapar
+	function Listele() {
+		$.ajax({
+			url: "/API/Setting/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idSettingTable").bootstrapTable('load', result.Data);
+				$("#idSettingTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+
+	// Save -Güncelleme işlemi yapar
+	function Save() {
+		var selectData = $("#idSettingTable").bootstrapTable("getSelections")[0];
+		var dt = JSON.stringify(FormToObject(selectData));
+		var _url = "/API/Setting/Add";
+
+		if ($("#idIdFrm").val() != "") {
+			_url = "/API/Setting/Update";
+		}
+
+		$.ajax({
+			url: _url,
+			data: dt,
+			type: 'Post',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+
+	// ObjectToForm - Gönderilen nesneyi form elementlerine setler
+	function ObjectToForm(obj) {
+        $("#idIdFrm").val(obj.Id);
+		$("#idVersionFrm").val(obj.Version);
+	}
+
+	// FormToObject - Formdan nesneye setler
+	function FormToObject(obj) {
+		obj.Version = $("#idVersionFrm").val();
+		return obj;
+	}
+</script>

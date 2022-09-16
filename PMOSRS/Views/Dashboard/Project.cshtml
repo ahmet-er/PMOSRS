@@ -8,9 +8,18 @@
 	<div class="col-sm-10">
 		<!-- Toolbar - Project Table Toolbar-->
 		<div id="toolbar">
-			<button id="idAddBtn" class="btn btn-primary btn-lg">Ekle</button>
-			<button id="idEditBtn" class="btn btn-primary btn-lg" style="margin-left: 10px;">Güncelle</button>
-			<button id="idDeleteBtn" class="btn btn-danger btn-lg" style="margin-left: 10px;">Sil</button>
+			<button id="idAddBtn" class="btn btn-labeled btn-primary">
+				<span class="btn-label"><i class="bi bi-plus-lg"></i></span> Ekle
+			</button>
+			<button id="idEditBtn" class="btn btn-labeled btn-success" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-pencil-square"></i></span> Güncelle
+			</button>
+			<button id="idDeleteBtn" class="btn btn-labeled btn-danger" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-trash"></i></span> Sil
+			</button>
+			<button id="idExprtCsvBtn" class="btn btn-labeled btn-warning" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-trash"></i></span> CSV
+			</button>
 
 		</div>
 
@@ -19,18 +28,24 @@
 			   class="table table-bordered table-hover"
 			   data-single-select="true"
 			   data-click-to-select="true"
-				data-sort-name="Name"
-				data-sort-order="desc"
-		data-search="true">
+			   data-show-export="true"
+			   data-search="true"
+			   data-sort-name="name"
+			   data-sort-order="desc"
+			   data-pagination="true">
+			@*data-filter-control="true"
+			data-show-search-clear-button="true"*@
+
 			<thead>
 				<tr>
 					<th data-field="state" data-checkbox="true"></th>
-					<th class="col" data-field="Id" data-sortable="true">ID</th>
-					<th class="col" data-field="Name" data-sortable="true">Proje Adı</th>
-					<th class="col" data-field="Description" data-sortable="true">Proje Açıklama</th>
+					@*<th class="col" data-field="Id" data-sortable="true">ID</th>*@
+					<th class="col" data-field="Name" data-filter-control="input" data-sortable="true">Proje Adı</th>
+					<th class="col" data-field="Description" data-sortable="true" data-filter-control="input">Proje Açıklama</th>
+					<th class="col" data-field="IsDeleted" data-sortable="true" data-filter-control="select">Is Deleted</th>
 				</tr>
 			</thead>
-			
+
 		</table>
 
 		<!-- Modal - Add, Update Modal -->
@@ -41,32 +56,59 @@
 						<h5 class="modal-title">Project</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<div class="modal-body">
-						<form id="frmProject">
+					<form id="frmProject" name="frmProject" class="needs-validation" novalidate>
+						<div class="modal-body">
 							<div class="mb-3">
 								<input id="idIdFrm" name="Id" placeholder="Id" class="form-control form-control-lg" type="text" hidden />
 							</div>
 
 							<div class="mb-3">
-								<label for="idNameFrm" class="form-label">İsim</label>
-								<input id="idNameFrm" name="Name" placeholder="İsim" class="form-control form-control-lg" type="text" />
+								<label for="idNameFrm" class="form-label">Proje Adı</label>
+								<input id="idNameFrm" name="Name" placeholder="Proje Adı" class="form-control form-control-lg" type="text" />
+								<span id="idNameSpan" class="text text-danger"></span>
 							</div>
 
 							<div class="mb-3">
-								<label for="idDescriptionFrm" class="form-label">Açıklama</label>
+								<label for="idDescriptionFrm" class="form-label">Proje Açıklaması</label>
 								<textarea id="idDescriptionFrm" name="Description" placeholder="Açıklama" class="form-control form-control-lg"></textarea>
+								<span id="idDescriptionSpan" class="text text-danger"></span>
+
 							</div>
+							<input id="idIsDeletedFrm" name="IsDeleted" hidden />
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+								<span class="btn-label"><i class="bi bi-x-lg"></i></span> Close
+							</button>
+							<button id="idProjectSaveBtn" type="button" class="btn btn-labeled btn-primary">
+								<span class="btn-label"><i class="bi bi-save"></i></span> Save
+							</button>
+						</div>
+					</form>
 
+				</div>
+			</div>
+		</div>
 
-						</form>
+		<!-- Modal - Delete Confirm Modal -->
+		<div id="idDeleteConfirmModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Seçili Projeyi Silmek Üzersiniz!</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Devam Etmek İstiyor musun?</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button id="idProjectSaveBtn" type="button" class="btn btn-primary">Save</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+						<button id="idDeleteConfirmBtn" type="button" class="btn btn-danger">Sil</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
 
@@ -77,7 +119,15 @@
 
 		$("#idDeleteBtn").click(function() {
 			var selectData = $("#idProjectTable").bootstrapTable("getSelections")[0];
+			if (selectData) {
+				$("#idDeleteConfirmModal").modal("show");
+			}
+			//Sil(selectData.Id);
+		});
+		$("#idDeleteConfirmBtn").click(function() {
+			var selectData = $("#idProjectTable").bootstrapTable("getSelections")[0];
 			Sil(selectData.Id);
+			$("#idDeleteConfirmModal").modal("hide");
 		});
 
 		$("#idAddBtn").click(function() {
@@ -93,15 +143,45 @@
 		});
 
 		$("#idProjectSaveBtn").click(function() {
+
+			var _name = $("#idNameFrm").val()
+			var _description = $("#idDescriptionFrm").val()
+			if (_name == "") {
+				document.getElementById("idNameSpan").innerHTML = "Lütfen Proje Adını Giriniz.";
+				return false;
+
+			} else if (_name.length > 50) {
+				document.getElementById("idNameSpan").innerHTML = "Proje Adı En Fazla 50 Karakter Olabilir.";
+				return false;
+			} else if (_description == "") {
+				document.getElementById("idDescriptionSpan").innerHTML = "Lütfen Proje Açıklamasını Giriniz.";
+				return false;
+
+			} else if (_description.length > 255) {
+				document.getElementById("idDescriptionSpan").innerHTML = "Proje Açıklaması En Fazla 255 Karakter Olabilir.";
+				return false;
+			}
 			Save();
 			$("#idAddUpdateModal").modal("hide");
 		});
+
+		$("#idExprtCsvBtn").click(function() {
+			$("#idProjectTable").tableExport({
+				type: "pdf",
+				pdfmake: {
+					enabled: true,
+					docDefinition: { pageOrientation: "landscape" }
+				}
+			});
+		});
+
+
 	});
 
 	// Listele - Listeleme işlemi yapar
 	function Listele() {
 		$.ajax({
-			url: "https://localhost:5001/API/Project/List",
+			url: "/API/Project/List",
 			//data: JSON.stringify(dt),
 			type: 'Get',
 			contentType: 'application/json; charset=utf-8',
@@ -116,7 +196,7 @@
 	// Sil - Silme işlemi yapar
 	function Sil(Id) {
 		$.ajax({
-			url: "https://localhost:5001/API/Project/Remove?Id=" + Id,
+			url: "/API/Project/Remove?Id=" + Id,
 			//data: JSON.stringify(dt),
 			type: 'Get',
 			contentType: 'application/json; charset=utf-8',
@@ -129,11 +209,16 @@
 	}
 	// Save - Ekleme ve güncelleme işlemi yapar
 	function Save() {
-		var dt = JSON.stringify($("#frmProject").serializeJSON());
-		var _url = "https://localhost:5001/API/Project/Add";
+		var selectData = $("#idProjectTable").bootstrapTable("getSelections")[0];
+		//var dt = JSON.stringify(FormToObject(selectData));
+		var _url = "/API/Project/Add";
 
 		if ($("#idIdFrm").val() != "") {
-			_url = "https://localhost:5001/API/Project/Update";
+			_url = "/API/Project/Update";
+			var dt = JSON.stringify(FormToObject(selectData));
+		} else {
+			var _object = { Id: "", Name: "", Description: "" };
+			var dt = JSON.stringify(FormToObject(_object));
 		}
 
 		$.ajax({
@@ -154,5 +239,28 @@
 		$("#idIdFrm").val(obj.Id);
 		$("#idNameFrm").val(obj.Name);
 		$("#idDescriptionFrm").val(obj.Description);
+		$("#idIsDeletedFrm").val(obj.IsDeleted);
 	}
+
+	// FormToObject - Formdan nesneye setler
+	function FormToObject(obj) {
+		obj.Name = $("#idNameFrm").val();
+		obj.Description = $("#idDescriptionFrm").val();
+		return obj;
+	}
+
+																		//$(function() {
+																		//	$('#idProjectTable').bootstrapTable({
+																		//		formatSearch: function() {
+																		//			return 'Search Project Name'
+																		//		}
+																		//	})
+																		//})
+
+																		//// customSearch - Tek Sütun için arama yapar
+																		//function customSearch(data, text) {
+																		//	return data.filter(function(row) {
+																		//		return row.Name.indexOf(text) > -1
+																		//	})
+																		//}
 </script>

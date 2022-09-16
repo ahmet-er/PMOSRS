@@ -40,6 +40,11 @@ namespace PMOSRS.Data.Core.Business
             return await _tSRepository.AsyncListele();
         }
 
+        public async Task<ResultItem<List<t_TSs>>> IliskiliSelect()
+        {
+            return await _tSRepository.AsyncIliskiselListele();
+        }
+
         public override async Task<ResultItem<t_TSs>> Update(t_TSs T)
         {
             var res = await _tSRepository.AsyncGetir(x => x.Id == T.Id);

@@ -26,6 +26,10 @@ namespace PMOSRS.Areas.API
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] t_Projects entity)
         {
+            if (!ModelState.IsValid)
+            {
+                return Json(entity);
+            }
             return Json(await _projectBusiness.Add(entity));
         }
 
@@ -41,7 +45,6 @@ namespace PMOSRS.Areas.API
             return Json(await _projectBusiness.Delete(id));
         }
 
-        //[HttpPost("List")]
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {

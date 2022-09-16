@@ -1,33 +1,41 @@
-﻿
-@{
-    ViewData["Title"] = "TS";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+﻿@{
+	ViewData["Title"] = "TS";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="container-fluid">
 
 	<div class="col-sm-10">
-		<!-- Toolbar - Project Table Toolbar-->
+		<!-- Toolbar - TS Table Toolbar-->
 		<div id="toolbar">
-			<button id="idAddBtn" class="btn btn-primary btn-lg">Ekle</button>
-			<button id="idEditBtn" class="btn btn-primary btn-lg" style="margin-left: 10px;">Güncelle</button>
-			<button id="idDeleteBtn" class="btn btn-danger btn-lg" style="margin-left: 10px;">Sil</button>
-
+			<button id="idAddBtn" class="btn btn-labeled btn-primary ">
+				<span class="btn-label"><i class="bi bi-plus-lg"></i></span> Ekle
+			</button>
+			<button id="idEditBtn" class="btn btn-labeled btn-success" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-pencil-square"></i></span> Güncelle
+			</button>
+			<button id="idDeleteBtn" class="btn btn-labeled btn-danger" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-trash"></i></span> Sil
+			</button>
 		</div>
 
-		<!-- Table - Project Table -->
-		<table id="idProjectTable"
+		<!-- Table - TS Table -->
+		<table id="idTSTable"
 			   class="table table-bordered table-hover"
 			   data-single-select="true"
 			   data-click-to-select="true"
-				data-sort-name="Name"
-				data-sort-order="desc"
-		data-search="true">
+			   data-sort-name="name"
+			   data-sort-order="desc"
+			   data-search="true"
+			   data-pagination="true">
 			<thead>
 				<tr>
 					<th data-field="state" data-checkbox="true"></th>
-					<th class="col" data-field="ProjectId" data-sortable="true">Bağlı Proje</th>
+					@*<th class="col" data-field="ProjectId" data-sortable="true">Bağlı Proje</th>*@
 					<th class="col" data-field="Name" data-sortable="true">Teknik Şartname Adı</th>
+					<th class="col" data-field="Projects.Name">Proje Adı</th>
+					<th class="col" data-field="Projects.Description">Proje Açıklama</th>
+					<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>
 				</tr>
 			</thead>
 		</table>
@@ -37,14 +45,21 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Project</h5>
+						<h5 class="modal-title">Teknik Şartname</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form id="frmProject">
+						<form id="frmTS">
 							<div class="mb-3">
-								<label for="idprojectIdFrm" class="form-label">Bağlı Olduğu Proje</label>
-								<input id="idProjectIdFrm" name="ProjectId" placeholder="Bağlı Olduğu Proje" class="form-control form-control-lg" />
+								<input id="idIdFrm" name="Id" placeholder="Id" class="form-control form-control-lg" type="text" hidden />
+								<input id="idProjectIdFrm" name="ProjectId" placeholder="ProjectId" class="form-control form-control-lg" type="text" hidden />
+							</div>
+							<div class="mb-3">
+								<button id="idSelectProjectNameBtn" type="button" class="btn btn-labeled btn-outline-success">
+									<span class="btn-label"><i class="bi bi-card-list"></i></span> Projeyi Seçiniz
+								</button><br />
+								<label class="form-label">Bağlı Olduğu Proje Adı</label><br />
+								<input id="idProjectNameFrm" name="Projects" placeholder="Teknik Şartnameye Bağlı Proje Adı" class="form-control form-control-lg" type="text" readonly/>
 							</div>
 							<div class="mb-3">
 								<label for="idNameFrm" class="form-label">Teknik Şartname Adı</label>
@@ -53,8 +68,57 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button id="idProjectSaveBtn" type="button" class="btn btn-primary">Save</button>
+						<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+							<span class="btn-label"><i class="bi bi-x-lg"></i></span> Vazgeç
+						</button>
+						<button id="idProjectSaveBtn" type="button" class="btn btn-labeled btn-primary">
+							<span class="btn-label"><i class="bi bi-save"></i></span> Kaydet
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal - Select Project Modal -->
+		<div id="idSelectProjectModal" class="modal fade modal-lg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Lütfen Bağlı Projeyi Seçiniz</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<!-- Table - Project Table -->
+						<table id="idProjectTable"
+							   class="table table-bordered table-hover"
+							   data-single-select="true"
+							   data-click-to-select="true"
+							   data-search="true"
+							   data-sort-name="name"
+							   data-sort-order="desc"
+							   data-pagination="true">
+							@*data-filter-control="true"
+							data-show-search-clear-button="true"*@
+
+							<thead>
+								<tr>
+									<th data-field="state" data-checkbox="true"></th>
+									@*<th class="col" data-field="Id" data-sortable="true">ID</th>*@
+									<th class="col" data-field="Name" data-filter-control="input" data-sortable="true">Proje Adı</th>
+									<th class="col" data-field="Description" data-sortable="true" data-filter-control="input">Proje Açıklama</th>
+									<th class="col" data-field="IsDeleted" data-sortable="true" data-filter-control="select">Is Deleted</th>
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+							<span class="btn-label"><i class="bi bi-x-lg"></i></span> Vazgeç
+						</button>
+						<button id="idGetProjectBtn" type="button" class="btn btn-labeled btn-success">
+							<span class="btn-label"><i class="bi bi-check-lg"></i></span> Seç
+						</button>
 					</div>
 				</div>
 			</div>
@@ -62,3 +126,124 @@
 	</div>
 </div>
 
+<script>
+	$(document).ready(function() {
+
+		Listele();
+
+		$("#idDeleteBtn").click(function() {
+			var selectData = $("#idTSTable").bootstrapTable("getSelections")[0];
+			Sil(selectData.Id);
+		});
+
+		$("#idAddBtn").click(function() {
+			var _object = { Id: "", ProjectId: "", Projects: "", Name: "" };
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idEditBtn").click(function() {
+			var _object = $("#idTSTable").bootstrapTable("getSelections")[0];
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idProjectSaveBtn").click(function() {
+			Save();
+			$("#idAddUpdateModal").modal("hide");
+		});
+
+		$("#idSelectProjectNameBtn").click(function() {
+			$("#idSelectProjectModal").modal("show");
+			ProjectListele();
+		});
+
+		$("#idGetProjectBtn").click(function() {
+			var _object = $("#idProjectTable").bootstrapTable("getSelections")[0];
+			$("#idSelectProjectModal").modal("hide");
+			ObjectToModal(_object);
+		});
+	});
+
+	// Listele - Listeleme işlemi yapar
+	function Listele() {
+		$.ajax({
+			url: "/API/TS/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idTSTable").bootstrapTable('load', result.Data);
+				$("#idTSTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+
+	function ProjectListele() {
+		$.ajax({
+			url: "/API/Project/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idProjectTable").bootstrapTable('load', result.Data);
+				$("#idProjectTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+
+	// Sil - Silme işlemi yapar
+	function Sil(Id) {
+		$.ajax({
+			url: "/API/TS/Remove?Id=" + Id,
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+	// Save - Ekleme ve güncelleme işlemi yapar
+	function Save() {
+		var dt = JSON.stringify($("#frmTS").serializeJSON());
+		var _url = "/API/TS/Add";
+
+		if ($("#idIdFrm").val() != "") {
+			_url = "/API/TS/Update";
+		}
+
+		$.ajax({
+			url: _url,
+			data: dt,
+			type: 'Post',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+
+	// ObjectToForm - Gönderilen nesneyi form elementlerine setler
+	function ObjectToForm(obj) {
+        $("#idIdFrm").val(obj.Id);
+        $("#idProjectIdFrm").val(obj.Projects.Id);
+		$("#idProjectNameFrm").val(obj.Projects.Name);
+		$("#idNameFrm").val(obj.Name);
+	}
+
+	// ObjectToModal - Seçilen Projeyi Modal Forma çeker
+	function ObjectToModal(obj) {
+        $("#idProjectIdFrm").val(obj.Id);
+		$("#idProjectNameFrm").val(obj.Name);
+	}
+
+</script>

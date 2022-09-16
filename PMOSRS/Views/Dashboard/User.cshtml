@@ -1,0 +1,268 @@
+﻿
+@{
+    ViewData["Title"] = "User";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+	<div class="col-sm-10">
+		<!-- Toolbar - Project Table Toolbar-->
+		<div id="toolbar">
+			<button id="idAddBtn" class="btn btn-labeled btn-primary">
+				<span class="btn-label"><i class="bi bi-plus-lg"></i></span> Ekle
+			</button>
+			<button id="idEditBtn" class="btn btn-labeled btn-success" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-pencil-square"></i></span> Güncelle
+			</button>
+			<button id="idDeleteBtn" class="btn btn-labeled btn-danger" style="margin-left: 10px;">
+				<span class="btn-label"><i class="bi bi-trash"></i></span> Sil
+			</button>
+
+		</div>
+
+		<!-- Table - Project Table -->
+		<table id="idUserTable"
+			   class="table table-bordered table-hover"
+			   data-single-select="true"
+			   data-click-to-select="true"
+			   data-search="true"
+			   data-sort-name="name"
+			   data-sort-order="desc"
+			   data-pagination="true">
+
+			<thead>
+				<tr>
+					<th data-field="state" data-checkbox="true"></th>
+					<th class="col" data-field="FirstName" data-filter-control="input" data-sortable="true">Ad</th>
+					<th class="col" data-field="LastName" data-filter-control="input" data-sortable="true">Soyad</th>
+					<th class="col" data-field="Email" data-filter-control="input" data-sortable="true">Email</th>
+					<th class="col" data-field="Password" data-filter-control="input" data-sortable="true">Şifre</th>
+					<th class="col" data-field="IsDeleted" data-sortable="true" data-filter-control="select">Is Deleted</th>
+				</tr>
+			</thead>
+
+		</table>
+
+		<!-- Modal - Add, Update Modal -->
+		<div id="idAddUpdateModal" class="modal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Kullanıcı</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<form id="frmUser" name="frmUser" class="needs-validation" novalidate>
+						<div class="modal-body">
+							<div class="mb-3">
+								<input id="idIdFrm" name="Id" placeholder="Id" class="form-control form-control-lg" type="text" hidden />
+							</div>
+
+							<div class="mb-3">
+								<label for="idFirstNameFrm" class="form-label">Ad</label>
+								<input id="idFirstNameFrm" name="FirstName" placeholder="Ad" class="form-control form-control-lg" type="text" />
+								<span id="idFirstNameSpan" class="text text-danger"></span>
+							</div>
+
+							<div class="mb-3">
+								<label for="idLastNameFrm" class="form-label">Soyad</label>
+								<input id="idLastNameFrm" name="LastName" placeholder="Soyad" class="form-control form-control-lg" type="text" />
+								<span id="idLastNameSpan" class="text text-danger"></span>
+							</div>
+
+							<div class="mb-3">
+								<label for="idEmailFrm" class="form-label">Email</label>
+								<input id="idEmailFrm" name="Email" placeholder="Email" class="form-control form-control-lg" type="email" />
+								<span id="idEmailSpan" class="text text-danger"></span>
+							</div>
+
+							<div class="mb-3">
+								<label for="idPasswordFrm" class="form-label">Şifre</label>
+								<input id="idPasswordFrm" name="Password" placeholder="Şifre" class="form-control form-control-lg" type="password" />
+								<span id="idPasswordSpan" class="text text-danger"></span>
+							</div>
+
+							<input id="idIsDeletedFrm" name="IsDeleted" hidden />
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-labeled btn-secondary" data-bs-dismiss="modal">
+								<span class="btn-label"><i class="bi bi-x-lg"></i></span> Close
+							</button>
+							<button id="idUserSaveBtn" type="button" class="btn btn-labeled btn-primary">
+								<span class="btn-label"><i class="bi bi-save"></i></span> Save
+							</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal - Delete Confirm Modal -->
+		<div id="idDeleteConfirmModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Seçili Kişiyi Silmek Üzersiniz!</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Devam Etmek İstiyor musun?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+						<button id="idDeleteConfirmBtn" type="button" class="btn btn-danger">Sil</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<script>
+	$(document).ready(function() {
+
+		Listele();
+
+		$("#idDeleteBtn").click(function() {
+			var selectData = $("#idUserTable").bootstrapTable("getSelections")[0];
+			if (selectData) {
+				$("#idDeleteConfirmModal").modal("show");
+			}
+		});
+		$("#idDeleteConfirmBtn").click(function() {
+			var selectData = $("#idUserTable").bootstrapTable("getSelections")[0];
+			Sil(selectData.Id);
+			$("#idDeleteConfirmModal").modal("hide");
+		});
+
+		$("#idAddBtn").click(function() {
+			var _object = { Id: "", FirstName: "", LastName: "", Email: "", Password: "" };
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idEditBtn").click(function() {
+			var _object = $("#idUserTable").bootstrapTable("getSelections")[0];
+			ObjectToForm(_object);
+			$("#idAddUpdateModal").modal("show");
+		});
+
+		$("#idUserSaveBtn").click(function() {
+
+			var _firstName = $("#idFirstNameFrm").val()
+			var _lastName = $("#idLastNameFrm").val()
+			var _email = $("#idEmailFrm").val()
+			var _password = $("#idPasswordFrm").val()
+            if (_firstName == "") {
+                document.getElementById("idFirstNameSpan").innerHTML = "Lütfen Adı Giriniz.";
+                return false;
+            } else if (_firstName.length > 50) {
+                document.getElementById("idFirstNameSpan").innerHTML = "Ad En Fazla 50 Karakter Olabilir.";
+                return false;
+            } else if (_lastName == "") {
+                document.getElementById("idLastNameSpan").innerHTML = "Lütfen Soyadı Giriniz.";
+                return false;
+            } else if (_lastName.length > 50) {
+                document.getElementById("idLastNameSpan").innerHTML = "Soyad En Fazla 50 Karakter Olabilir.";
+                return false;
+            } else if (_email == "") {
+				document.getElementById("idEmailSpan").innerHTML = "Lütfen Email Adresini Giriniz.";
+                return false;
+			} else if (_email.length > 350) {
+                document.getElementById("idEmailSpan").innerHTML = "Soyad En Fazla 50 Karakter Olabilir.";
+                return false;
+            } else if (_password == "") {
+				document.getElementById("idPasswordSpan").innerHTML = "Lütfen Şifrenizi Giriniz.";
+                return false;
+			} else if (_password.length > 256) {
+                document.getElementById("idPasswordSpan").innerHTML = "Şifre En Fazla 256 Karakter Olabilir.";
+                return false;
+            }else if (_password.length < 3) {
+                document.getElementById("idPasswordSpan").innerHTML = "Şifre En Az 3 Karakter Olabilir.";
+                return false;
+            }
+			Save();
+			$("#idAddUpdateModal").modal("hide");
+		});
+	});
+
+	// Listele - Listeleme işlemi yapar
+	function Listele() {
+		$.ajax({
+			url: "/API/User/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				$("#idUserTable").bootstrapTable('load', result.Data);
+				$("#idUserTable").bootstrapTable({ data: result.Data });
+			}
+		});
+	}
+	// Sil - Silme işlemi yapar
+	function Sil(Id) {
+		$.ajax({
+			url: "/API/User/Remove?Id=" + Id,
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+	// Save - Ekleme ve güncelleme işlemi yapar
+	function Save() {
+		var selectData = $("#idUserTable").bootstrapTable("getSelections")[0];
+		//var dt = JSON.stringify($("#frmUser").serializeJSON());
+		var _url = "/API/User/Add";
+
+        if ($("#idIdFrm").val() != "") {
+            var dt = JSON.stringify(FormToObject(selectData));
+            _url = "/API/User/Update";
+        } else {
+			var _object = { Id: "", FirstName: "", LastName: "", Email: "", Password: "" };
+            var dt = JSON.stringify(FormToObject(_object));
+			
+		}
+
+		$.ajax({
+			url: _url,
+			data: dt,
+			type: 'Post',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: function(result) {
+				Listele();
+			}
+		});
+	}
+
+	// ObjectToForm - Gönderilen nesneyi form elementlerine setler
+	function ObjectToForm(obj) {
+		$("#idIdFrm").val(obj.Id);
+		$("#idFirstNameFrm").val(obj.FirstName);
+		$("#idLastNameFrm").val(obj.LastName);
+		$("#idEmailFrm").val(obj.Email);
+		$("#idPasswordFrm").val(obj.Password);
+		$("#idIsDeletedFrm").val(obj.IsDeleted);
+	}
+
+	// FormToObject - Formdan nesneye setler
+	function FormToObject(obj) {
+		obj.FirstName = $("#idFirstNameFrm").val();
+		obj.LastName = $("#idLastNameFrm").val();
+		obj.Email = $("#idEmailFrm").val();
+		obj.Password = $("#idPasswordFrm").val();
+		return obj;
+	}
+
+</script>

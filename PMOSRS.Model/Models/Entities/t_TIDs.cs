@@ -7,7 +7,7 @@ namespace PMOSRS.Model.Models.Entities
 {
     public class t_TIDs : BaseEntity
     {
-        [Required, MaxLength(36), Display(Name = "TS Id")]
+        [Required, Display(Name = "TS Id")]
         public Guid TSId { get; set; }
         [ForeignKey("TSId")]
         public virtual t_TSs TS { get; set; }
