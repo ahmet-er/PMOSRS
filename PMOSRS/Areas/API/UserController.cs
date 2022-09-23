@@ -46,7 +46,7 @@ namespace PMOSRS.Areas.API
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            return Json(await _userBusiness.Select());
+            return Json(await _userBusiness.List());
         }
 		//[HttpGet("Login")]
 		//public async Task<IActionResult> Login([FromBody] LoginItem loginItem)

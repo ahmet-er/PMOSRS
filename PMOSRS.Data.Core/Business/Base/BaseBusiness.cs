@@ -12,6 +12,6 @@ namespace PMOSRS.Data.Core.Business.Base
         public abstract Task<ResultItem<TEntity>> Add(TEntity T);
         public abstract Task<ResultItem<TEntity>> Update(TEntity T);
         public abstract Task<ResultItem<TEntity>> Delete(Guid guid);
-        public abstract Task<ResultItem<List<TEntity>>> Select();
+        public abstract Task<ResultItem<List<TEntity>>> List();
     }
 }

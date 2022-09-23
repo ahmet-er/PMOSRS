@@ -35,12 +35,12 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_SRSs>>> Select()
+        public override async Task<ResultItem<List<t_SRSs>>> List()
         {
             return await _sRSRepository.AsyncListele();
         }
 
-        public async Task<ResultItem<List<t_SRSs>>> IliskiliSelect()
+        public async Task<ResultItem<List<t_SRSs>>> IliskiliList()
         {
             return await _sRSRepository.AsyncIliskiselListele();
         }

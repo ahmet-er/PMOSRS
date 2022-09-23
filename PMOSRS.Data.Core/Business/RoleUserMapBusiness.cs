@@ -35,7 +35,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_RoleUserMaps>>> Select()
+        public override async Task<ResultItem<List<t_RoleUserMaps>>> List()
         {
             return await _roleUserMapRepository.AsyncListele();
         }

@@ -1,7 +1,6 @@
-﻿
-@{
-    ViewData["Title"] = "Parameter";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+﻿@{
+	ViewData["Title"] = "Parameter";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
 <div class="container-fluid">
@@ -18,7 +17,8 @@
 		<table id="idSettingTable"
 			   class="table table-bordered table-hover mt-5"
 			   data-single-select="true"
-			   data-click-to-select="true">
+			   data-click-to-select="true"
+			   data-toolbar="#toolbar">
 
 			<thead>
 				<tr>
@@ -44,7 +44,7 @@
 							</div>
 
 							<div class="mb-3">
-								<label for="idVersionFrm" class="form-label">Proje Adı</label>
+								<label for="idVersionFrm" class="form-label">Proje Version</label>
 								<input id="idVersionFrm" name="Version" placeholder="Proje Version" class="form-control form-control-lg" type="text" />
 								<span id="idVersionSpan" class="text text-danger"></span>
 							</div>
@@ -88,7 +88,7 @@
 			} else if (_version.length > 50) {
 				document.getElementById("idVersionSpan").innerHTML = "Proje Adı En Fazla 50 Karakter Olabilir.";
 				return false;
-			} 
+			}
 			Save();
 			$("#idUpdateModal").modal("hide");
 		});
@@ -137,7 +137,7 @@
 
 	// ObjectToForm - Gönderilen nesneyi form elementlerine setler
 	function ObjectToForm(obj) {
-        $("#idIdFrm").val(obj.Id);
+		$("#idIdFrm").val(obj.Id);
 		$("#idVersionFrm").val(obj.Version);
 	}
 

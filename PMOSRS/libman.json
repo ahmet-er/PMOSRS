@@ -42,6 +42,22 @@
     {
       "library": "TableExport@5.2.0",
       "destination": "wwwroot/lib/table-export/"
+    },
+    {
+      "library": "jspdf@2.5.1",
+      "destination": "wwwroot/lib/jsPDF/"
+    },
+    {
+      "library": "jspdf-autotable@3.5.25",
+      "destination": "wwwroot/lib/jsPDF-AutoTable/"
+    },
+    {
+      "library": "FileSaver.js@2.0.5",
+      "destination": "wwwroot/lib/FileSaver/"
+    },
+    {
+      "library": "xlsx@0.18.5",
+      "destination": "wwwroot/lib/js-xlsx/"
     }
 
 

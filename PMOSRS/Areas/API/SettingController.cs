@@ -2,6 +2,7 @@
 using PMOSRS.Areas.API.Controllers.Base;
 using PMOSRS.Data.Core.Business;
 using PMOSRS.Data.Core.Repository;
+using PMOSRS.Model.Models.Context;
 using PMOSRS.Model.Models.Entities;
 using System;
 using System.Threading.Tasks;
@@ -42,7 +43,16 @@ namespace PMOSRS.Areas.API
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            return Json(await _settingBusiness.Select());
+            //using (var context = new PMOSRSContext())
+            //{
+            //    var settings = context.t_Settings.Find("Version");
+            //    ViewBag.Version = settings.Version;
+
+
+
+            //}
+            //return View(ViewBag.Version);
+            return Json(await _settingBusiness.List());
         }
     }
 }

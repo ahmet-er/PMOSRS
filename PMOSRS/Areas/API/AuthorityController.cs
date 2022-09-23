@@ -42,7 +42,7 @@ namespace PMOSRS.Areas.API
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            return Json(await _authorityBusiness.Select());
+            return Json(await _authorityBusiness.List());
         }
     }
 }

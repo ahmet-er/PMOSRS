@@ -13,18 +13,30 @@
 	<link rel="stylesheet" href="~/css/sidebars.css">
 	<link rel="stylesheet" href="~/css/buttons.css">
 	<link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+
 	<script src="~/lib/jquery361/jquery.js"></script>
 	<script src="~/lib/popper/umd/popper.js"></script>
 	<script src="~/js/sidebars.js"></script>
 	<script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
-	<script src="~/lib/table-export/js/tableexport.min.js"></script>
 
+	<script src="~/lib/FileSaver/FileSaver.js"></script>
+	<script src="~/lib/js-xlsx/xlsx.core.min.js"></script>
+	<script src="~/lib/jsPDF/polyfills.umd.js"></script>
+	<script src="~/lib/jsPDF/jspdf.umd.min.js"></script>
+	<script src="~/lib/jsPDF-AutoTable/jspdf.plugin.autotable.min.js"></script>
 	<script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
 	<script src="~/lib/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
+	<script src="~/lib/table-export/js/tableexport.min.js"></script>
+
+	<script src="~/lib/bootstrap-table/extensions/print/bootstrap-table-print.min.js"></script>
+	<script src="~/lib/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+
+
+
 	<script src="~/lib/jquery-serializeJSON/jquery.serializejson.js"></script>
 	<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
 	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-	<script src="~/lib/pdfmake/pdfmake.min.js"></script>
 
 
 	<title>Dashboard</title>
@@ -165,11 +177,11 @@
 		<!-- Copyright -->
 		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 			© 2022 Copyright:
-			<a class="text-white" target="_blank" href="https://www.arksoft.com.tr/">ARKSOFT</a>
-			<span id="idVersionSpan" class="text-white border-3"> - Version 1.0</span>
+			<a class="text-white" target="_blank" href="https://www.arksoft.com.tr/">ARKSOFT</a> - <span class="text-white border-3">
+				@ViewBag.v
+			</span>
 		</div>
 	</footer>
 
 </body>
-
 </html>

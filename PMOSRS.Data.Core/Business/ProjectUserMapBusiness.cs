@@ -35,7 +35,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_ProjectUserMaps>>> Select()
+        public override async Task<ResultItem<List<t_ProjectUserMaps>>> List()
         {
             return await _projectUserMapRepository.AsyncListele();
         }

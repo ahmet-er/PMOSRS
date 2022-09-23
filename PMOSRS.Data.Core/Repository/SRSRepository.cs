@@ -26,9 +26,15 @@ namespace PMOSRS.Data.Core.Repository
                         var ns = cnt.Set<t_SRSs>();
 
                         if (filtre == null)
+                        {
                             m.Data = await ns.Include(x => x.TID).ToListAsync();
+                            m.Data = await ns.Include(x => x.SRSState).ToListAsync();
+                        }
                         else
+                        {
                             m.Data = await ns.Include(x => x.TID).Where(filtre).ToListAsync();
+                            m.Data = await ns.Include(x => x.SRSState).Where(filtre).ToListAsync();
+                        }
 
                         m.Data = m.Data ?? new List<t_SRSs>();
                     }
@@ -42,9 +48,15 @@ namespace PMOSRS.Data.Core.Repository
                         var ns = cnt.Set<t_SRSs>();
 
                         if (filtre == null)
+                        {
                             m.Data = await ns.AsNoTracking().Include(x => x.TID).ToListAsync();
+                            m.Data = await ns.AsNoTracking().Include(x => x.SRSState).ToListAsync();
+                        }
                         else
+                        {
                             m.Data = await ns.Include(x => x.TID).Where(filtre).AsNoTracking().ToListAsync();
+                            m.Data = await ns.Include(x => x.SRSState).Where(filtre).AsNoTracking().ToListAsync();
+                        }
 
                         m.Data = m.Data ?? new List<t_SRSs>();
                     }

@@ -34,7 +34,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_AuthorityRoleMaps>>> Select()
+        public override async Task<ResultItem<List<t_AuthorityRoleMaps>>> List()
         {
             return await _authorityRoleMapRepository.AsyncListele();
         }

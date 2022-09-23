@@ -35,7 +35,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_Roles>>> Select()
+        public override async Task<ResultItem<List<t_Roles>>> List()
         {
             return await _roleRepository.AsyncListele();
         }

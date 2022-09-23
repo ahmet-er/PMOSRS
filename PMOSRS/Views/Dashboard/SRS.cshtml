@@ -24,21 +24,21 @@
 			   class="table table-bordered table-hover"
 			   data-single-select="true"
 			   data-click-to-select="true"
+			   data-toolbar="#toolbar"
 			   data-sort-name="name"
 			   data-sort-order="desc"
-			   data-search="true"
-			   data-pagination="true">
+			   data-pagination="true"
+			   data-filter-control="true"
+			   data-show-search-clear-button="true">
 			<thead>
 				<tr>
 					<th data-field="state" data-checkbox="true"></th>
-					<th class="col" data-field="TID.WorkItemCode">Bağlı Olduğu TID Kodu</th>
-					<th class="col" data-field="WorkItemCode">SRS Work Item Code</th>
-					<th class="col" data-field="Tags">SRS Tags</th>
-					<th class="col" data-field="RelScope">SRS Rel Scope</th>
-					@*<th class="col" data-field="Title">TID Başlık</th>*@
-					<th class="col" data-field="Description">SRS Açıklama</th>
-					<th class="col" data-field="SRSState.Name">SRS Durum Adı</th>
-					<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>
+					<th class="col" data-field="WorkItemCode" data-filter-control="input">Work Item Code</th>
+					<th class="col" data-field="Tags" data-filter-control="input">Tags</th>
+					<th class="col" data-field="RelScope" data-filter-control="input">RelScope</th>
+					<th class="col" data-field="Description" data-filter-control="input">Açıklama</th>
+					<th class="col" data-field="SRSState.Name" data-filter-control="select">State</th>
+					<th class="col" data-field="IsDeleted" data-sortable="true" data-filter-control="select">Is Deleted</th>
 				</tr>
 			</thead>
 		</table>
@@ -59,10 +59,10 @@
 							</div>
 							<div class="mb-3">
 								<button id="idSelectTIDBtn" type="button" class="btn btn-labeled btn-outline-success">
-									<span class="btn-label"><i class="bi bi-card-list"></i></span> Bağlı TID'i Seçiniz
+									<span class="btn-label"><i class="bi bi-card-list"></i></span> Teknik İsteri Seçiniz
 								</button><br />
-								<label class="form-label">Bağlı Olduğu Teknik İsterin Kodu</label><br />
-								<input id="idTIDWorkItemCodeFrm" name="TIDWorkItemCode" placeholder="Yazılım Gereksinimine Bağlı Teknik İster Kodu" class="form-control form-control-lg" type="text" readonly />
+								<label for="idRelScopeFrm" class="form-label">RelScope</label><br />
+								<input id="idRelScopeFrm" name="RelScope" placeholder="RelScope (Yukarıdaki butondan TID Seçiniz)" class="form-control form-control-lg" type="text" readonly />
 							</div>
 							<div class="mb-3">
 								<label for="idWorkItemCodeFrm" class="form-label">Work Item Code</label>
@@ -73,17 +73,17 @@
 								<input id="idTagsFrm" name="Tags" placeholder="Tags" class="form-control form-control-lg" type="text" />
 							</div>
 							<div class="mb-3">
-								<label for="idRelScopeFrm" class="form-label">Rel Scope</label>
-								<input id="idRelScopeFrm" name="RelScope" placeholder="Rel Scope" class="form-control form-control-lg" type="text" />
-							</div>
-							<div class="mb-3">
 								<label for="idDescriptionFrm" class="form-label">Teknik İster Açıklaması</label>
 								<textarea id="idDescriptionFrm" name="Description" placeholder="Yazılım Gereksinimi Açıklama" class="form-control form-control-lg"></textarea>
 								<span id="idDescriptionSpan" class="text text-danger"></span>
 							</div>
 							<div class="mb-3">
-								<label for="idSRSStatesNameFrm" class="form-label">SRS Durum</label>
-								<input id="idSRSStateNameFrm" name="SRSStates" placeholder="SRS Durum Seçiniz" class="form-control form-control-lg" type="text" />
+								<label for="idStateFrm" class="form-label">State</label>
+								<select id="idStateFrm" name="State" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+									<option value="1" selected>Proposed</option>
+									<option value="2">Approved</option>
+									<option value="3">Cancelled</option>
+								</select>
 							</div>
 						</form>
 					</div>
@@ -113,24 +113,23 @@
 							   class="table table-bordered table-hover"
 							   data-single-select="true"
 							   data-click-to-select="true"
-							   data-search="true"
+							   data-filter-control="true"
+							   data-show-search-clear-button="true"
 							   data-sort-name="name"
 							   data-sort-order="desc"
 							   data-pagination="true">
-							@*data-filter-control="true"
-							data-show-search-clear-button="true"*@
+
 
 							<thead>
 								<tr>
 									<th data-field="state" data-checkbox="true"></th>
-									<th class="col" data-field="TS.Name">Bağlı Olduğu TŞ Adı</th>
-									<th class="col" data-field="WorkItemCode">TID Work Item Code</th>
-									<th class="col" data-field="Tags">TID Tags</th>
-									<th class="col" data-field="RelScope">TID Rel Scope</th>
-									<th class="col" data-field="Title">TID Başlık</th>
-									@*<th class="col" data-field="Description">TID Açıklama</th>*@
-									@*<th class="col" data-field="TIDStates.Name">TID Durum Adı</th>*@
-									@*<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>*@
+									<th class="col" data-field="WorkItemCode" data-filter-control="input">Work Item Code</th>
+									<th class="col" data-field="Tags" data-filter-control="input">Tags</th>
+									<th class="col" data-field="RelScope" data-filter-control="input">Rel Scope</th>
+									<th class="col" data-field="Title" data-filter-control="input">Başlık</th>
+									<th class="col" data-field="Description" data-filter-control="input">Açıklama</th>
+									<th class="col" data-field="TIDState.Name" data-filter-control="select">State</th>
+									<th class="col" data-field="IsDeleted" data-sortable="true" data-filter-control="select">Is Deleted</th>
 								</tr>
 							</thead>
 
@@ -161,7 +160,7 @@
 		});
 
 		$("#idAddBtn").click(function() {
-			var _object = { Id: "", TIDId: "", TID: "", WorkItemCode: "", Tags: "", RelScope: "", Description: "", TIDStates: "" };
+			var _object = { Id: "", TIDId: "", TID: "", WorkItemCode: "", Tags: "", RelScope: "", Description: "" };
 			ObjectToForm(_object);
 			$("#idAddUpdateModal").modal("show");
 		});
@@ -239,11 +238,11 @@
 		var selectData = $("#idSRSTable").bootstrapTable("getSelections")[0];
 		var _url = "/API/SRS/Add";
 
-        if ($("#idIdFrm").val() != "") {
-            _url = "/API/SRS/Update";
+		if ($("#idIdFrm").val() != "") {
+			_url = "/API/SRS/Update";
 			var dt = JSON.stringify(FormToObject(selectData));
-        } else {
-			var _object = { Id: "", TSId: "", TSs: "", WorkItemCode: "", Tags: "", RelScope: "", Description: "", TIDStates: "" };
+		} else {
+			var _object = { TSId: "", WorkItemCode: "", Tags: "", RelScope: "", Description: "", StateId: "" };
 			var dt = JSON.stringify(FormToObject(_object));
 		}
 
@@ -264,32 +263,27 @@
 	function ObjectToForm(obj) {
 		$("#idIdFrm").val(obj.Id);
 		$("#idTIDIdFrm").val(obj.TIDId);
-		$("#idTIDNameFrm").val(obj.TID.WorkItemCode);
+		$("#idRelScopeFrm").val(obj.TID.WorkItemCode);
 		$("#idWorkItemCodeFrm").val(obj.WorkItemCode);
 		$("#idTagsFrm").val(obj.Tags);
-		$("#idRelScopeFrm").val(obj.RelScope);
-		//$("#idTitleFrm").val(obj.Title);
 		$("#idDescriptionFrm").val(obj.Description);
-		$("#idSRSStatesFrm").val(obj.TIDStates);
+		$("#idStateFrm").val(obj.StateId);
 	}
 
 	// ObjectToModal - Seçilen Projeyi Modal Forma çeker
 	function ObjectToModal(obj) {
 		$("#idTIDIdFrm").val(obj.Id);
-		$("#idTIDWorkItemCodeFrm").val(obj.WorkItemCode);
+		$("#idRelScopeFrm").val(obj.WorkItemCode);
 	}
 
 	// FormToObject - Formdan nesneye setler
 	function FormToObject(obj) {
-		obj.Id = $("#idIdFrm").val();
 		obj.TIDId = $("#idTIDIdFrm").val();
-		obj.TID.WorkItemCode = $("#idTIDNameFrm").val();
 		obj.WorkItemCode = $("#idWorkItemCodeFrm").val();
 		obj.Tags = $("#idTagsFrm").val();
 		obj.RelScope = $("#idRelScopeFrm").val();
-		//obj.Title = $("#idTitleFrm").val();
 		obj.Description = $("#idDescriptionFrm").val();
-		obj.TIDStates = $("#idSRSStatesNameFrm").val();
+		obj.StateId = $("#idStateFrm").val();
 		return obj;
 	}
 

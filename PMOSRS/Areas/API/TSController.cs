@@ -42,10 +42,7 @@ namespace PMOSRS.Areas.API
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            //var query = from m in _tSBusiness
-            //            join pi in _tSBusiness on
-            //            m.ProjectId equals pi.ProjectId
-            return Json(await _tSBusiness.IliskiliSelect());
+            return Json(await _tSBusiness.IliskiliList());
         }
     }
 }

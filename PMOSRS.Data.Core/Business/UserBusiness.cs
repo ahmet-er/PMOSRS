@@ -37,7 +37,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_Users>>> Select()
+        public override async Task<ResultItem<List<t_Users>>> List()
         {
             return await _userRepository.AsyncListele();
         }

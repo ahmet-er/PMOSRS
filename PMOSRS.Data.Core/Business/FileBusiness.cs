@@ -35,7 +35,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_Files>>> Select()
+        public override async Task<ResultItem<List<t_Files>>> List()
         {
             return await _fileRepository.AsyncListele();
         }

@@ -26,9 +26,15 @@ namespace PMOSRS.Data.Core.Repository
                         var ns = cnt.Set<t_TIDs>();
 
                         if (filtre == null)
+                        {
                             m.Data = await ns.Include(x => x.TS).ToListAsync();
+                            m.Data = await ns.Include(x => x.TIDState).ToListAsync();
+                        }
                         else
+                        {
                             m.Data = await ns.Include(x => x.TS).Where(filtre).ToListAsync();
+                            m.Data = await ns.Include(x => x.TIDState).Where(filtre).ToListAsync();
+                        }
 
                         m.Data = m.Data ?? new List<t_TIDs>();
                     }
@@ -42,9 +48,15 @@ namespace PMOSRS.Data.Core.Repository
                         var ns = cnt.Set<t_TIDs>();
 
                         if (filtre == null)
+                        {
                             m.Data = await ns.AsNoTracking().Include(x => x.TS).ToListAsync();
+                            m.Data = await ns.AsNoTracking().Include(x => x.TIDState).ToListAsync();
+                        }
                         else
+                        {
                             m.Data = await ns.Include(x => x.TS).Where(filtre).AsNoTracking().ToListAsync();
+                            m.Data = await ns.Include(x => x.TIDState).Where(filtre).AsNoTracking().ToListAsync();
+                        }
 
                         m.Data = m.Data ?? new List<t_TIDs>();
                     }
@@ -59,6 +71,7 @@ namespace PMOSRS.Data.Core.Repository
                 m.Message = ex.Message + Environment.NewLine + ex.StackTrace;
             }
             return m;
+            //state
         }
     }
 }

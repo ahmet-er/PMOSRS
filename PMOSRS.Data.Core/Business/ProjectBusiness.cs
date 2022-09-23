@@ -35,7 +35,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_Projects>>> Select()
+        public override async Task<ResultItem<List<t_Projects>>> List()
         {
             return await _projectRepository.AsyncListele();
         }

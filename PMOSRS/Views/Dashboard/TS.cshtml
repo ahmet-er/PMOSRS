@@ -24,18 +24,21 @@
 			   class="table table-bordered table-hover"
 			   data-single-select="true"
 			   data-click-to-select="true"
+			   data-toolbar="#toolbar"
 			   data-sort-name="name"
 			   data-sort-order="desc"
-			   data-search="true"
+			   data-filter-control="true"
+			   data-show-search-clear-button="true"
+			   data-show-print="true"
 			   data-pagination="true">
 			<thead>
 				<tr>
 					<th data-field="state" data-checkbox="true"></th>
 					@*<th class="col" data-field="ProjectId" data-sortable="true">Bağlı Proje</th>*@
-					<th class="col" data-field="Name" data-sortable="true">Teknik Şartname Adı</th>
-					<th class="col" data-field="Projects.Name">Proje Adı</th>
-					<th class="col" data-field="Projects.Description">Proje Açıklama</th>
-					<th class="col" data-field="IsDeleted" data-sortable="true">Is Deleted</th>
+					<th class="col" data-field="Name" data-sortable="true" data-filter-control="input">Teknik Şartname Adı</th>
+					<th class="col" data-field="Projects.Name" data-filter-control="input">Proje Adı</th>
+					<th class="col" data-field="Projects.Description" data-filter-control="input">Proje Açıklama</th>
+					<th class="col" data-field="IsDeleted" data-sortable="true" data-filter-control="select">Is Deleted</th>
 				</tr>
 			</thead>
 		</table>
@@ -93,7 +96,8 @@
 							   class="table table-bordered table-hover"
 							   data-single-select="true"
 							   data-click-to-select="true"
-							   data-search="true"
+							   data-filter-control="true"
+							   data-show-search-clear-button="true"
 							   data-sort-name="name"
 							   data-sort-order="desc"
 							   data-pagination="true">
@@ -212,11 +216,16 @@
 	}
 	// Save - Ekleme ve güncelleme işlemi yapar
 	function Save() {
-		var dt = JSON.stringify($("#frmTS").serializeJSON());
+		var selectData = $("#idProjectTable").bootstrapTable("getSelections")[0];
+		//var dt = JSON.stringify($("#frmTS").serializeJSON());
 		var _url = "/API/TS/Add";
 
 		if ($("#idIdFrm").val() != "") {
 			_url = "/API/TS/Update";
+			var dt = JSON.stringify(FormToObject(selectData));
+		}else {
+			var _object = { ProjectId: "", Name: ""};
+			var dt = JSON.stringify(FormToObject(_object));
 		}
 
 		$.ajax({
@@ -244,6 +253,13 @@
 	function ObjectToModal(obj) {
         $("#idProjectIdFrm").val(obj.Id);
 		$("#idProjectNameFrm").val(obj.Name);
+	}
+
+	// FormToObject - Formdan nesneye setler
+	function FormToObject(obj) {
+		obj.ProjectId = $("#idProjectIdFrm").val();
+		obj.Name = $("#idNameFrm").val();
+		return obj;
 	}
 
 </script>

@@ -35,7 +35,7 @@ namespace PMOSRS.Data.Core.Business
             }
         }
 
-        public override async Task<ResultItem<List<t_Settings>>> Select()
+        public override async Task<ResultItem<List<t_Settings>>> List()
         {
             return await _settingRepository.AsyncListele();
         }
