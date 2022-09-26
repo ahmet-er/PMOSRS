@@ -19,17 +19,24 @@
 	<script src="~/js/sidebars.js"></script>
 	<script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
 
-	<script src="~/lib/FileSaver/FileSaver.js"></script>
-	<script src="~/lib/js-xlsx/xlsx.core.min.js"></script>
-	<script src="~/lib/jsPDF/polyfills.umd.js"></script>
+	<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+	@*
+	<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js"></script>
+	<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>*@
+
 	<script src="~/lib/jsPDF/jspdf.umd.min.js"></script>
+@*
+	<script src="~/lib/table-export/js/tableexport.min.js"></script>
 	<script src="~/lib/jsPDF-AutoTable/jspdf.plugin.autotable.min.js"></script>
 	<script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
-	<script src="~/lib/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>
-	<script src="~/lib/table-export/js/tableexport.min.js"></script>
+	<script src="~/lib/bootstrap-table/extensions/export/bootstrap-table-export.min.js"></script>*@
 
+	@*<script src="~/lib/jsPDF/polyfills.umd.js"></script>*@
+	@*<script src="~/lib/FileSaver/FileSaver.js"></script>*@
+	@*<script src="~/lib/js-xlsx/xlsx.core.min.js"></script>*@
+@*
 	<script src="~/lib/bootstrap-table/extensions/print/bootstrap-table-print.min.js"></script>
-	<script src="~/lib/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+	*@
 
 
 
@@ -38,6 +45,18 @@
 	<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
 	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
+	@*<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+	<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js"></script>
+	<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>*@
+
+	<script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="~/lib/bootstrap-table/locale/bootstrap-table-tr-TR.min.js"></script>
+	<script src="~/lib/bootstrap-table/extensions/auto-refresh/bootstrap-table-auto-refresh.js"></script>
+	<script src="~/lib/bootstrap-table/extensions/key-events/bootstrap-table-key-events.js"></script>
+	<script src="~/lib/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
+	<script src="~/lib/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js"></script>
+
+	<script src="~/lib/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
 	<title>Dashboard</title>
 </head>
@@ -177,11 +196,34 @@
 		<!-- Copyright -->
 		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
 			© 2022 Copyright:
-			<a class="text-white" target="_blank" href="https://www.arksoft.com.tr/">ARKSOFT</a> - <span class="text-white border-3">
-				@ViewBag.v
-			</span>
+			<a class="text-white" target="_blank" href="https://www.arksoft.com.tr/">ARKSOFT</a> - <span id="idVersion" class="text-white border-3"></span>
 		</div>
 	</footer>
 
 </body>
+<script>
+	$(document).ready(function() {
+
+		GetVersion();
+
+	});
+
+	// GetVersion - Footer'a version bilgisini çeker
+	function GetVersion() {
+		$.ajax({
+			url: "/API/Setting/List",
+			//data: JSON.stringify(dt),
+			type: 'Get',
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: true,
+			success: function(result) {
+				if (result.Data != null && result.Data.length > 0) {
+					$("#idVersion").html(result.Data[0].Version);
+				}
+
+			}
+		});
+	}
+</script>
 </html>

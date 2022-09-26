@@ -43,15 +43,6 @@ namespace PMOSRS.Areas.API
         [HttpGet("List")]
         public async Task<IActionResult> List()
         {
-            //using (var context = new PMOSRSContext())
-            //{
-            //    var settings = context.t_Settings.Find("Version");
-            //    ViewBag.Version = settings.Version;
-
-
-
-            //}
-            //return View(ViewBag.Version);
             return Json(await _settingBusiness.List());
         }
     }

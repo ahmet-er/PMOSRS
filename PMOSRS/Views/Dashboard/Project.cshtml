@@ -115,7 +115,7 @@
 
 		<!-- Toasts -->
 
-		<div id="idToast" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		@*<div id="idToast" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
 			<div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
 				<div class="toast-header">
 					<img src="..." class="rounded me-2" alt="...">
@@ -127,7 +127,7 @@
 					<p id="idToastMessage">sea</p>
 				</div>
 			</div>
-		</div>
+		</div>*@
 
 
 	</div>
@@ -135,6 +135,10 @@
 
 <script>
 	$(document).ready(function() {
+
+        $("#idProjectTable").bootstrapTable('destroy').bootstrapTable({
+			exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel', 'pdf']
+		}).trigger('change');
 
 		Listele();
 
@@ -190,6 +194,7 @@
             let bsAlert = new bootstrao.Toast(alert);
             bsAlert.show();
 		});
+
 
 
 	});

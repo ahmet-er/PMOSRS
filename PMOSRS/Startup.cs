@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace PMOSRS
 {
@@ -43,6 +46,14 @@ namespace PMOSRS
             services.AddTransient(new FileRepository().GetType());
             services.AddTransient(new AuthorityRoleMapRepository().GetType());
             services.AddTransient(new AuthorityRepository().GetType());
+
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)// ben ekledim deneme
+            //    .AddCookie(options =>
+            //    {
+            //        options.AccessDeniedPath = "#";
+            //        options.LoginPath = "/Login/Index";
+            //    });
+            //services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>>(); // ben ekledim deneme
 
             services.AddCors();
 
